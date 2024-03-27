@@ -22,8 +22,7 @@
         </span>
 
         <span class="sosmed">
-          <p><strong>Narahubung</strong></p>
-          <a href="https://wa.me/+6283845715328">Risha 0838-4571-5328</a>
+          <h4 @click="logOut">LogOut</h4>
         </span>
       </div>
 
@@ -45,6 +44,10 @@ export default {
 
     pushToHomeAdmin() {
       this.$router.push({ name: 'AdmHomePage' })
+    },
+
+    logOut() {
+      localStorage.clear()
     }
   },
 
