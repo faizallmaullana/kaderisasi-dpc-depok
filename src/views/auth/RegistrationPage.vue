@@ -64,11 +64,9 @@ export default {
         this.$router.push({ name: 'AdmHomePage' })
       } catch (error) {
         if (error.response.status == 406) {
-          this.clearAlert();
           this.alertMessage = "Token tidak valid"
           this.alertStatus = true;
         } else if (error.response.data.message == "username already exists") {
-          this.clearAlert();
           this.alertMessage = "Username tidak valid";
           this.alertStatus = true;
         } else {

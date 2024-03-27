@@ -6,6 +6,11 @@
           <h4>Home</h4>
         </span>
 
+        <span @click="pushToHomeAdmin" class="logo">
+          <img src="@/assets/home.png" alt="Home">
+          <h4>Home Admin</h4>
+        </span>
+
         <hr style="width: 100%; transform: translateY(-10px);">
 
         <span @click="pushToHome" class="organization">
@@ -35,6 +40,10 @@ export default {
 
   methods: {
     pushToHome() {
+      this.$router.push({ name: 'HomePage' })
+    },
+
+    pushToHomeAdmin() {
       this.$router.push({ name: 'AdmHomePage' })
     }
   },

@@ -37,7 +37,7 @@ const routes = [
     component: () => import('../views/admin/AdmHomePage.vue')
   },
   {
-    path: '/adm/database',
+    path: '/database',
     name: 'DatabaseManagement',
     component: () => import('../views/admin/DatabaseManagement.vue')
   }

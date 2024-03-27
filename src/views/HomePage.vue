@@ -57,7 +57,7 @@ export default {
 
     <div class="div" style="display: flex; flex-direction: column; gap: 20px;" v-if="nomorTelpon === 'Admin'">
       <br>
-      <router-link :to="{name: 'AdmHomePage'}">Halaman Admin</router-link>
+      <router-link :to="{name: 'LoginPage'}">Halaman Admin</router-link>
       <router-link :to="{name: 'RegistrationPage'}">Registrasi</router-link>
     </div>
   </article>
