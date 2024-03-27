@@ -1,0 +1,182 @@
+#LandingPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#LandingPage a{
+  color: var(--black2);
+}
+
+.red {
+  border-radius: 5px;
+  padding: 15px;
+  background-color: rgba(255, 0, 0, 0.11);
+}
+
+.heroImage {
+  position: relative;
+  /* Ensure relative positioning for absolute child */
+  width: 100%;
+}
+
+.heroImage img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.temaKegiatan {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  /* Adjust as needed */
+  left: 50%;
+  /* Adjust as needed */
+  transform: translate(-50%, -50%);
+  color: white;
+  padding: 20px 0;
+  z-index: 999;
+  /* Ensure it's above the image */
+  text-align: center;
+  /* Center the text */
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.inputButton {
+  background-color: var(--red);
+  color: white;
+}
+
+.inputButton:hover {
+  background-color: var(--black);
+  color: white;
+}
+
+
+article {
+  background-color: #ffffff;
+  width: 900px;
+  max-width: 100%;
+  box-shadow: 0 0 7px 0 #888;
+  padding: 50px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  min-width: 300px;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+form {
+  width: 400px;
+  max-width: 80% !important;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  border-width: 0 0 2px 0;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+form label {
+  font-size: 13px;
+}
+
+form.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+input {
+  outline: none !important;
+}
+
+input:focus {
+  border-color: var(--red);
+}
+
+form .radio {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+form .formRight {
+  margin-bottom: 10px;
+  text-align: start;
+  font-size: 15px !important
+}
+
+form .radio label {
+  font-size: 15px !important;;
+}
+
+form .radio span {
+  display: flex;
+  align-items: center;
+}
+
+form .radio span input {
+  width: 30px;
+}
+
+.checkbox {
+  transform: scale(1.3);
+  margin: 10px 0;
+}
+
+form.kesediaan label {
+  font-size: 16px !important;
+}
+
+/* responsive */
+
+@media screen and (max-width: 1280px) {
+  article {
+    padding: 30px 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  article form.wrapper {
+    justify-content: center !important;
+    align-items: center;
+  }
+
+  article .header {
+    max-width: 90%;
+  }
+
+  article .divider {
+    width: 80% !important;
+  }
+
+  article form input {
+    padding: 10px 0 !important;
+  }
+
+  form .radio label {
+    font-size: 15px !important;;
+  }
+
+  form .radio input {
+    font-size: 15px !important;;
+  }
+}
