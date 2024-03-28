@@ -180,3 +180,9 @@ form.kesediaan label {
     font-size: 15px !important;;
   }
 }
+
+@media screen and (max-width: 768px){
+  article {
+    gap: 0;
+  }
+}

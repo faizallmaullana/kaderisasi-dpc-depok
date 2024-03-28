@@ -1,6 +1,20 @@
 <template>
   <article>
-    <p>{{ peserta }}</p>
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Komisariat</th>
+        <th>Peserta</th>
+      </tr>
+      <tr v-for="(peserta, index) in pesertas" :key="index">
+        <td>{{ index + 1 }}</td>
+        <td>{{ peserta.Nama }}</td>
+        <td>{{ peserta.Komisariat }}</td>
+        <td></td>
+      </tr>
+    </table>
+    <p>{{ pesertas }}</p>
   </article>
 </template>
 
@@ -12,7 +26,7 @@ export default {
   
   data() {
     return {
-      peserta: [],
+      pesertas: [],
       selectedArea: ''
     }
   },
@@ -25,9 +39,9 @@ export default {
   computed: {
     filteredMitra() {
       if (this.selectedArea === 'Semua') {
-        return this.peserta;
+        return this.pesertas;
       } else {
-        return this.peserta.filter(peserta => peserta.Nama === this.selectedArea);
+        return this.pesertas.filter(peserta => peserta.Nama === this.selectedArea);
       }
     },
     totalMitra() {
@@ -40,7 +54,7 @@ export default {
       try {
         const result = await axios.get("/peserta")
         result.data.peserta.sort((a, b) => (a.Nama > b.Nama) ? 1 : -1);
-        this.peserta = result.data.peserta
+        this.pesertas = result.data.peserta
       } catch (err) {
         console.error(err)
       }

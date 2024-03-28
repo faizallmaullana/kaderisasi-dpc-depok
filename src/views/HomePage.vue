@@ -7,7 +7,6 @@ export default {
   data() {
     return {
       nomorTelpon: '',
-      statusPendaftaran: false,
     }
   },
 
@@ -21,10 +20,6 @@ export default {
     pushPendaftaran() {
       this.$router.push({ name: 'PendaftaranPage' });
     },
-
-    cekPeserta() {
-      this.statusPendaftaran = !this.statusPendaftaran;
-    }
   }
 
 }
@@ -40,27 +35,25 @@ export default {
     </div>
 
     <article>
-    <div class="cekPeserta" v-if="statusPendaftaran">
-      <h3>Cek Status Keikutsertaan</h3>
-      <form @submit.prevent="goToStatus" style="max-width: 80%">
-        <label for="">Nomor Telpon</label>
-        <input class="inputBiasa" type="text" v-model="nomorTelpon" placeholder="Masukkan Nomor Telpon Anda...">
-        <br> <br>
-        <input type="submit" value="Cek Status" class="inputButton">
-      </form>
-    </div>
+      <div class="cekPeserta">
+        <h3>Cek Status Keikutsertaan</h3>
+        <form @submit.prevent="goToStatus" style="max-width: 80%">
+          <label for="">Nomor Telpon</label>
+          <input class="inputBiasa" type="text" v-model="nomorTelpon" placeholder="Masukkan Nomor Telpon Anda...">
+          <br> <br>
+          <input type="submit" value="Cek Status" class="inputButton cekStatus">
 
-    <div class="option">
-      <button @click="cekPeserta" class="secondary">Cek Peserta</button>
-      <button @click="pushPendaftaran">Pendaftaran</button>
-    </div>
+          <p style="text-align: center">Belum Daftar?</p>
+          <input class="inputButton pendaftaran" type="submit" value="Pendaftaran" @click="pushPendaftaran" />
+        </form>
+      </div>
 
-    <div class="div" style="display: flex; flex-direction: column; gap: 20px;" v-if="nomorTelpon === 'Admin'">
-      <br>
-      <router-link :to="{name: 'LoginPage'}">Halaman Admin</router-link>
-      <router-link :to="{name: 'RegistrationPage'}">Registrasi</router-link>
-    </div>
-  </article>
+      <div class="div" style="display: flex; flex-direction: column; gap: 20px;" v-if="nomorTelpon === 'Admin'">
+        <br>
+        <router-link :to="{ name: 'LoginPage' }">Halaman Admin</router-link>
+        <router-link :to="{ name: 'RegistrationPage' }">Registrasi</router-link>
+      </div>
+    </article>
 
     <article>
       <div class="header">
@@ -103,5 +96,22 @@ export default {
 .option {
   display: flex;
   gap: 20px
+}
+
+form input.pendaftaran {
+  padding: 15px 20px;
+}
+
+form input.cekStatus {
+  background-color: transparent;
+  border-width: 3px;
+  color: var(--red);
+  border-style: solid;
+  border-color: var(--red)
+}
+
+form input.cekStatus:hover {
+  background-color: var(--red);
+  color: var(--white);
 }
 </style>
