@@ -26,6 +26,7 @@
 
       <section>
         <img @click="pushToHome" src="@/assets/logo.png" alt="">
+        <br><br>
         <h3 v-if="status != 'TidakTerdaftar'">Anda <em>Terdaftar</em> sebagai "{{ status }}"</h3>
         <div v-else>
           <h3>Anda <em>Tidak Terdaftar</em> sebagai peserta KTD maupun PPAB</h3>
@@ -183,6 +184,11 @@ export default {
     text-align: center;
   }
 
+  #StatusPendaftaran {
+    height: auto;
+    margin-top: 10px
+  }
+
   #StatusPendaftaran .wrapper {
     padding: 30px 10px;
     min-height: 50%;
@@ -191,6 +197,20 @@ export default {
   #StatusPendaftaran .header h2 {
     font-size: 20px;
   }
+
+  #StatusPendaftaran .wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 #8888;
+  padding: 30px 15px;
+  flex-wrap: wrap-reverse;
+  margin: 10px;
+}
+
 }
 </style>
 

@@ -53,7 +53,7 @@ export default {
         if (status == "401") {
           this.alertStatus = true;
           this.alertMessage = "Username atau password salah";
-          return
+          window.location.reload();
         }
       }
     },
