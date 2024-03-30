@@ -30,7 +30,7 @@ export default {
 
   methods: {
     downloadDatabase() {
-      axios.get('/getdb', { responseType: 'blob' })
+      axios.get('/database', { responseType: 'blob' })
         .then(response => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement('a');
