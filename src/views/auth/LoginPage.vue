@@ -55,6 +55,7 @@ export default {
           this.alertMessage = "Username atau password salah";
           window.location.reload();
         }
+        console.log(error)
       }
     },
   },

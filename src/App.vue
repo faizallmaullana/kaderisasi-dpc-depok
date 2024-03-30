@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <div class="content">
       <router-view />
@@ -31,7 +32,7 @@ export default {
 
     isAuth() {
       // Check if the current route is one of the specified pages
-      const validPages = ['AdmHomePage', 'DatabaseManagement'];
+      const validPages = ['AdmHomePage', 'DatabaseManagement', "AdmDaftarPeserta"];
       return validPages.includes(this.$route.name);
     },
   },
@@ -49,7 +50,6 @@ export default {
 @import url(@/assets/styles/button.css);
 @import url(@/assets/styles/footer.css);
 @import url(@/assets/styles/auth.css);
-
 </style>
 
 <style>
@@ -122,5 +122,27 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+</style>
+
+<style>
+/* Set the scrollbar width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #cfcfcf;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2b2b2b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #c40000;
 }
 </style>

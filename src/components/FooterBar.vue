@@ -19,6 +19,7 @@
         <span class="sosmed">
           <p><strong>Narahubung</strong></p>
           <a href="https://wa.me/+6283845715328">Risha 0838-4571-5328</a>
+          <a href="https://wa.me/+6285162808518">Faizal 0851-6280-8518</a>
         </span>
       </div>
 
@@ -40,3 +41,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+footer .sosmed {
+  margin-top: 10px;;
+  gap: 10px;
+}
+</style>

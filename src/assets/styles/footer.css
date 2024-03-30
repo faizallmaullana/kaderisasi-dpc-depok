@@ -18,6 +18,10 @@ footer span.logo h4 {
   color: var(--white);
 }
 
+footer span.logo h4:hover {
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
 footer span.logo {
   display: flex;
   gap: 10px;

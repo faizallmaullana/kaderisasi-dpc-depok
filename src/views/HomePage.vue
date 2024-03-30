@@ -12,8 +12,9 @@ export default {
 
   methods: {
     goToStatus() {
-      if (this.nomorTelpon.length > 0) {
+      if (this.nomorTelpon.length > 0 && this.nomorTelpon !== "Admin") {
         this.$router.push({ path: `/status/${this.nomorTelpon}` })
+        return
       }
     },
 
@@ -29,7 +30,7 @@ export default {
   <div id="LandingPage">
     <div class="heroImage">
       <div class="temaKegiatan">
-        <h2>Ini adalah Tema Kegiatan, Rada Panjang dikit</h2>
+        <h2>Memaknai Marhaenisme guna Menghadapi Bonus Demografi</h2>
       </div>
       <img src="@/assets/hero.jpg" alt="">
     </div>
@@ -40,6 +41,11 @@ export default {
         <form @submit.prevent="goToStatus" style="max-width: 80%">
           <label for="">Nomor Telpon</label>
           <input class="inputBiasa" type="text" v-model="nomorTelpon" placeholder="Masukkan Nomor Telpon Anda...">
+          <div class="div" style="display: flex; flex-direction: column; gap: 20px;" v-if="nomorTelpon === 'Admin'">
+            <br>
+            <router-link :to="{ name: 'LoginPage' }">Halaman Admin</router-link>
+            <router-link :to="{ name: 'RegistrationPage' }">Registrasi</router-link>
+          </div>
           <br> <br>
           <input type="submit" value="Cek Status" class="inputButton cekStatus">
 
@@ -48,11 +54,6 @@ export default {
         </form>
       </div>
 
-      <div class="div" style="display: flex; flex-direction: column; gap: 20px;" v-if="nomorTelpon === 'Admin'">
-        <br>
-        <router-link :to="{ name: 'LoginPage' }">Halaman Admin</router-link>
-        <router-link :to="{ name: 'RegistrationPage' }">Registrasi</router-link>
-      </div>
     </article>
 
     <article>

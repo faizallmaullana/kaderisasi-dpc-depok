@@ -1,7 +1,7 @@
 <template>
   <div id="StatusPendaftaran">
     <div class="wrapper">
-      <section v-if="status != 'TidakTerdaftar'" class="head text-end">
+      <section class="head text-end">
         <h3>Agenda</h3>
 
         <div class="header">
@@ -17,27 +17,32 @@
           <h4>Jum'at, 19 April 2024 s.d. Minggu, 21 April 2024</h4>
         </div>
 
-        <div class="header">
+        <!-- <div class="header">
           <p><strong>Merdeka!!!</strong></p>
           <p style="color:var(--red); font-weight: 600;">PEJUANG PEMIKIR - PEMIKIR PEJUANG</p>
-        </div>
+        </div> -->
 
       </section>
 
       <section>
         <img @click="pushToHome" src="@/assets/logo.png" alt="">
         <br><br>
-        <h3 v-if="status != 'TidakTerdaftar'">Anda <em>Terdaftar</em> sebagai "{{ status }}"</h3>
-        <div v-else>
-          <h3>Anda <em>Tidak Terdaftar</em> sebagai peserta KTD maupun PPAB</h3>
-          <br>
-          <button @click="pushPendaftaran">Daftarkan Diri</button>
-        </div>
 
-        <div v-if="status != 'TidakTerdaftar'" class="dataPeserta">
+        <div v-if="status != ''">
+          <h3>Anda <em>{{ status }}</em> sebagai peserta KTD maupun PPAB</h3>
+          <br>
+          <div class="bt-divide">
+            <button @click="pushToHome" class="secondary">Kembali</button>
+            <button @click="pushPendaftaran">Daftarkan Diri</button>
+          </div>
+        </div>
+        <h3 v-else>Anda <em>Terdaftar</em> sebagai "{{ statusPeserta }}"</h3>
+        
+        <div v-if="status == ''" class="dataPeserta">
           <h2>{{ peserta.Nama }}</h2>
           <p>Komisariat {{ peserta.Komisariat }} | {{ peserta.Universitas }}</p>
         </div>
+
       </section>
     </div>
   </div>
@@ -54,6 +59,7 @@ export default {
       nomorTelpon: '',
       peserta: '',
       status: '',
+      statusPeserta: '',
     }
   },
 
@@ -67,27 +73,35 @@ export default {
       try {
         const result = await axios.get(`/peserta/${this.nomorTelpon}`);
         if (result.status != '200') {
-          this.status = 'TidakTerdaftar'
+          if (result.status == '204') {
+            this.status = 'Tidak Memenuhi Syarat';
+            return
+          }
+          this.status = 'Tidak Terdaftar'
           return
         }
 
         this.peserta = result.data.peserta
-        this.status = result.data.statusPendaftaran
+        this.statusPeserta = result.data.statusPendaftaran
       }
       catch (err) {
-        if (err.status != '200') {
-          this.status = 'TidakTerdaftar'
+        if (err.response.status != '200') {
+          if (err.response.status == '204') {
+            this.status = 'Tidak Memenuhi Syarat';
+            return
+          }
+          this.status = 'Tidak Terdaftar';
           return
         }
       }
     },
 
     pushToHome() {
-      this.$router.push({name: 'HomePage'})
+      this.$router.push({ name: 'HomePage' })
     },
 
     pushPendaftaran() {
-      this.$router.push({ name: 'PendaftaranPage'});
+      this.$router.push({ name: 'PendaftaranPage' });
     },
   }
 }
@@ -125,7 +139,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 50px;
   background-color: white;
   width: 85%;
   min-height: 80%;
@@ -199,17 +213,17 @@ export default {
   }
 
   #StatusPendaftaran .wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 #8888;
-  padding: 30px 15px;
-  flex-wrap: wrap-reverse;
-  margin: 10px;
-}
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 #8888;
+    padding: 30px 15px;
+    flex-wrap: wrap-reverse;
+    margin: 10px;
+  }
 
 }
 </style>

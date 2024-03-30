@@ -25,3 +25,14 @@ button:hover {
   background-color: rgba(255, 0, 0, 0.224);
   border-color: rgba(255, 0, 0, 0.224);
 }
+
+.bt-divide {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  gap: 6%;
+}
+
+.bt-divide button {
+  width: 47% !important;
+}

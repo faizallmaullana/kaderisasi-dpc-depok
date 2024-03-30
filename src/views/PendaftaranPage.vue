@@ -36,7 +36,7 @@ export default {
         this.$router.push(`/status/${phone}`)
       }
       catch (error) {
-        console.log(error);
+        this.$router.push(`/status/08`)
       }
     }
   }
@@ -47,7 +47,7 @@ export default {
   <div id="LandingPage">
     <div class="heroImage">
       <div class="temaKegiatan">
-        <h2>Ini adalah Tema Kegiatan, Rada Panjang dikit</h2>
+        <h2>Memaknai Marhaenisme guna Menghadapi Bonus Demografi</h2>
       </div>
       <img src="@/assets/hero.jpg" alt="">
     </div>
@@ -55,8 +55,9 @@ export default {
     <article>
       <div class="header">
         <h1>Formulir Pendaftaran</h1>
-        <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar dan Pekan Penerimaan Anggota Baru DPC GMNI DEPOK 2024</h2>
-        <h4>Jum'at, 19 April 2024 s.d. Minggu, 21 April 2024</h4>
+        <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar dan Pekan Penerimaan Anggota Baru</h2>
+        <h2 style="color:var(--red)">DPC GMNI DEPOK 2024</h2>
+
         <p>Halo, Bung dan Sarinah</p>
         <p>Terima kasih atas ketersediaan Anda untuk mengisi formulir registrasi ini. Untuk informasi lebih lanjut dan
           jika terdapat pertanyaan, silakan untuk mengubungi <a href="https://wa.me/+6283845715328">Sarinah Risha (0838 4571 5328)</a>. Sampai bertemu, Bung dan
