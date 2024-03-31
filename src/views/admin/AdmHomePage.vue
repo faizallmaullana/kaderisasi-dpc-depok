@@ -1,9 +1,5 @@
 <template>
   <div id="Admin">
-    <!-- <article>
-      <HeaderAdmin />
-    </article> -->
-  
     <article class="round">
       <div class="navButton">
         <button @click="filterByKTD">KTD</button>
@@ -31,20 +27,15 @@
 
 <script>
 import { axios } from '@/axios/config.js';
-// import HeaderAdmin from '@/components/HeaderAdm.vue';
 
 export default {
   name: 'AdmDaftarPeserta',
 
-  // components: {
-  //   HeaderAdmin,
-  // },
-
   data() {
     return {
       pesertas: [],
-      filteredPeserta: [], // Newly added property for filtered pesertas
-      selectedFilter: 'Semua', // Newly added property to track selected filter
+      filteredPeserta: [],
+      selectedFilter: 'Semua',
     }
   },
 

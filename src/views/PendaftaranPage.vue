@@ -1,5 +1,6 @@
 <script>
-import {axios} from  "@/axios/config.js";
+import { axios } from "@/axios/config.js";
+import { toProperCase } from "@/assets/js/toProperCase.js";
 
 export default {
   name: 'PendaftaranPage',
@@ -14,17 +15,19 @@ export default {
       phone: '',
       komisariat: '',
       universitas: '',
+      cabang: 'Depok',
     }
   },
 
   methods: {
     async submitData() {
       const data = {
-        Nama: this.nama,
+        Nama: toProperCase(this.nama),
         Email: this.email,
         Phone: this.phone,
         komisariat: this.komisariat,
         Universitas: this.universitas,
+        Cabang: this.cabang,
         IsKtd: this.isktd,
         IsPpab: this.isppab,
         IsWillPpab: this.isWillPpab
@@ -60,7 +63,8 @@ export default {
 
         <p>Halo, Bung dan Sarinah</p>
         <p>Terima kasih atas ketersediaan Anda untuk mengisi formulir registrasi ini. Untuk informasi lebih lanjut dan
-          jika terdapat pertanyaan, silakan untuk mengubungi <a href="https://wa.me/+6283845715328">Sarinah Risha (0838 4571 5328)</a>. Sampai bertemu, Bung dan
+          jika terdapat pertanyaan, silakan untuk mengubungi <a href="https://wa.me/+6283845715328">Sarinah Risha (0838
+            4571 5328)</a>. Sampai bertemu, Bung dan
           Sarinah.</p>
         <p><strong>Merdeka!!!</strong></p>
         <p style="color:var(--red); font-weight: 600;">PEJUANG PEMIKIR - PEMIKIR PEJUANG</p>
@@ -82,11 +86,14 @@ export default {
           <label for="phone">Nomor WhatsApp</label>
           <input type="text" id="phone" v-model="phone" placeholder="08..." required>
 
-          <label for="komisariat">Asal Komisariat</label>
+          <label for="komisariat">Komisariat</label>
           <input type="text" id="komisariat" v-model="komisariat" placeholder="Asal Komisariat..." required>
 
-          <label for="universitas">Asal Universitas</label>
+          <label for="universitas">Universitas</label>
           <input type="text" id="universitas" v-model="universitas" placeholder="Asal Universitas..." required>
+
+          <label for="cabang">Cabang</label>
+          <input type="text" id="cabang" v-model="cabang" placeholder="Asal Cabang..." required>
         </div>
 
         <!-- </form>
@@ -97,24 +104,25 @@ export default {
 
           <label for="" class="formRight">Apakah Anda bersedia untuk mengikuti Kaderisasi Tingkat Dasar DPC GMNI
             Depok 2024?</label>
-            <div class="radio">
-              <span>
-                <input id="bersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox" value="true">
-                <label for="bersediaKTD">Saya <strong>bersedia</strong></label>
-              </span>
-              
-              <span>
-                <input id="tidakBersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox" value="false">
-                <label for="tidakBersediaKTD">Saya <strong>tidak bersedia</strong></label>
-              </span>
-            </div>
+          <div class="radio">
+            <span>
+              <input id="bersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox" value="true">
+              <label for="bersediaKTD">Saya <strong>bersedia</strong></label>
+            </span>
 
-            <label for="" class="formRight">Apakah Anda sudah mengikuti Pekan Penerimaan Anggota Baru (PPAB)?</label>
-            <div class="radio">
-              <span>
-                <input type="radio" id="ppabTrue" v-model="isppab" placeholder="Nama" class="checkbox" value="true">
-                <label for="ppabTrue">Saya <strong>sudah</strong> mengikuti PPAB</label>
-              </span>
+            <span>
+              <input id="tidakBersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox"
+                value="false">
+              <label for="tidakBersediaKTD">Saya <strong>tidak bersedia</strong></label>
+            </span>
+          </div>
+
+          <label for="" class="formRight">Apakah Anda sudah mengikuti Pekan Penerimaan Anggota Baru (PPAB)?</label>
+          <div class="radio">
+            <span>
+              <input type="radio" id="ppabTrue" v-model="isppab" placeholder="Nama" class="checkbox" value="true">
+              <label for="ppabTrue">Saya <strong>sudah</strong> mengikuti PPAB</label>
+            </span>
 
             <span>
               <input type="radio" id="ppabFalse" v-model="isppab" placeholder="Nama" class="checkbox" value="false">
@@ -134,12 +142,14 @@ export default {
           </label>
           <div class="radio" v-if="isppab === 'false'">
             <span>
-              <input type="radio" id="isWillPpabTrue" v-model="isWillPpab" placeholder="Nama" class="checkbox" value="true">
+              <input type="radio" id="isWillPpabTrue" v-model="isWillPpab" placeholder="Nama" class="checkbox"
+                value="true">
               <label for="isWillPpabTrue">Saya <strong>bersedia</strong> mengikuti PPAB</label>
             </span>
 
             <span>
-              <input type="radio" id="isWillPpabFalse" v-model="isWillPpab" placeholder="Nama" class="checkbox" value="false">
+              <input type="radio" id="isWillPpabFalse" v-model="isWillPpab" placeholder="Nama" class="checkbox"
+                value="false">
               <label for="isWillPpabFalse">Saya <strong>tidak bersedia</strong> mengikuti PPAB</label>
             </span>
           </div>

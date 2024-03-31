@@ -1,31 +1,3 @@
-<script>
-// import {axios} from  "@/axios/config.js";
-
-export default {
-  name: 'HomePage',
-
-  data() {
-    return {
-      nomorTelpon: '',
-    }
-  },
-
-  methods: {
-    goToStatus() {
-      if (this.nomorTelpon.length > 0 && this.nomorTelpon !== "Admin") {
-        this.$router.push({ path: `/status/${this.nomorTelpon}` })
-        return
-      }
-    },
-
-    pushPendaftaran() {
-      this.$router.push({ name: 'PendaftaranPage' });
-    },
-  }
-
-}
-</script>
-
 <template>
   <div id="LandingPage">
     <div class="heroImage">
@@ -74,6 +46,33 @@ export default {
     </article>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'HomePage',
+
+  data() {
+    return {
+      nomorTelpon: '',
+    }
+  },
+
+  methods: {
+    goToStatus() {
+      if (this.nomorTelpon.length > 0 && this.nomorTelpon !== "Admin") {
+        this.$router.push({ path: `/status/${this.nomorTelpon}` })
+        return
+      }
+    },
+
+    pushPendaftaran() {
+      this.$router.push({ name: 'PendaftaranPage' });
+    },
+  }
+
+}
+</script>
+
 
 <style scoped>
 #LandingPage form p {
