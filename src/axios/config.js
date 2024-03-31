@@ -33,7 +33,7 @@ API.interceptors.response.use(
         // Handle 401 Unauthorized error
         if (error.response.status === 401) {
             localStorage.clear();
-            window.location.href = "/dialog-logout-page";
+            window.location.href = "/";
         }
         return Promise.reject(error);
     }
