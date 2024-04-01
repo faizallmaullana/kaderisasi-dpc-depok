@@ -27,9 +27,9 @@
         </table>
 
         <div class="bt-divide">
-            <button @click="$emit('backResponse', false)" class="secondary">Kembali</button>
-            <button @click="pushPendaftaran">Ubah Data</button>
-          </div>
+          <button @click="$emit('backResponse', false)" class="secondary">Kembali</button>
+          <button @click="pushPendaftaran">Ubah Data</button>
+        </div>
       </div>
     </div>
   </div>
@@ -87,5 +87,9 @@ export default {
 p.statusPendaftaran {
   color: var(--red);
   font-weight: 600;
+}
+
+.floating .bt-divide {
+  width: 80% !important;
 }
 </style>
