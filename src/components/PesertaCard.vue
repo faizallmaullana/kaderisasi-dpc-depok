@@ -26,10 +26,10 @@
           </td>
         </table>
 
-        <div class="bt-divide">
-          <button @click="$emit('backResponse', false)" class="secondary">Kembali</button>
-          <button @click="pushPendaftaran">Ubah Data</button>
-        </div>
+      </div>
+      <div class="bt-divide">
+        <button @click="$emit('backResponse', false)" class="secondary">Kembali</button>
+        <button @click="pushPendaftaran">Ubah Data</button>
       </div>
     </div>
   </div>
@@ -63,21 +63,18 @@ export default {
 
 .floating .content {
   background-color: white;
-  width: 90vw;
+  width: 80vw;
   border-radius: 8px;
   max-width: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2em 1em;
 }
 
 .floating table {
   text-align: left;
   border-spacing: 10px;
-}
-
-.floating .article {
-  margin: 40px 25px;
 }
 
 .floating img {
