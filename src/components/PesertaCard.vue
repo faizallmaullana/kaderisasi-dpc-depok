@@ -77,6 +77,13 @@ export default {
   border-spacing: 10px;
 }
 
+.floating table td{
+  max-width: 30%;
+  overflow-wrap: break-word;
+  word-break: break-all; 
+}
+
+
 .floating img {
   width: 70px;
 }
