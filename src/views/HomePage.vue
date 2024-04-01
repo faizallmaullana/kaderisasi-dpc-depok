@@ -30,7 +30,7 @@
 
     <article>
       <div class="header">
-        <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar dan Pekan Penerimaan Anggota Baru DPC GMNI DEPOK 2024
+        <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar DPC GMNI DEPOK 2024
         </h2>
         <h4>Jum'at, 19 April 2024 s.d. Minggu, 21 April 2024</h4>
       </div>
