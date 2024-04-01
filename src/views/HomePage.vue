@@ -30,16 +30,20 @@
 
     <article>
       <div class="header">
-        <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar DPC GMNI DEPOK 2024
+        <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar
         </h2>
+        <h3>DPC GMNI DEPOK 2024</h3>
+        <hr>
         <h4>Jum'at, 19 April 2024 s.d. Minggu, 21 April 2024</h4>
       </div>
     </article>
 
     <article>
       <div class="header">
-        <h2 style="color:var(--red)">Pekan Penerimaan Anggota Baru DPC GMNI Depok 2024
+        <h2 style="color:var(--red)">Pekan Penerimaan Anggota Baru
         </h2>
+        <h3>DPC GMNI Depok 2024</h3>
+        <hr>
         <h4>Rabu, 17 April 2024</h4>
         <p>Pukul 17.00 WIB s.d. 21.00 WIB</p>
       </div>
@@ -75,6 +79,10 @@ export default {
 
 
 <style scoped>
+#LandingPage .header h2 {
+  font-size: 25px;
+}
+
 #LandingPage form p {
   margin-block: none;
   text-align: end;

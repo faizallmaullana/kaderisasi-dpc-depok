@@ -5,16 +5,19 @@
         <h3>Agenda</h3>
 
         <div class="header">
-          <h2 style="color:var(--red)">Pekan Penerimaan Anggota Baru DPC GMNI Depok 2024
+          <h2 style="color:var(--red)">Pekan Penerimaan Anggota Baru
           </h2>
+          <h3>DPC GMNI DEPOK 2024</h3>
           <h4>Rabu, 17 April 2024</h4>
           <p>Pukul 17.00 WIB s.d. 21.00 WIB</p>
+          <hr>
         </div>
-
         <div class="header">
-          <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar DPC GMNI DEPOK 2024
+          <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar
           </h2>
+          <h3>DPC GMNI DEPOK 2024</h3>
           <h4>Jum'at, 19 April 2024 s.d. Minggu, 21 April 2024</h4>
+          <hr>
         </div>
 
         <!-- <div class="header">
@@ -193,7 +196,7 @@ export default {
 </style>
 
 <style scoped>
-@media screen and (max-width: 729px) {
+@media screen and (max-width: 728px) {
   .text-end {
     text-align: center;
   }
