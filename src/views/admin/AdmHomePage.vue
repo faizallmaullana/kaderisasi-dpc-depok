@@ -17,8 +17,17 @@
           <h3>{{ peserta.peserta.Nama }}</h3>
           <h5>{{ peserta.status_pendaftaran }}</h5>
           <p>Komisariat {{ peserta.peserta.Komisariat }} | {{ peserta.peserta.Universitas }}</p>
-          <a
-            :href="'https://wa.me/' + peserta.peserta.Phone + '?text=Selamat%20' + waktu + '%20Bung%2FSarinah%21%20%0A%0ADalam%20rangka%20pelaksanaan%20rangkaian%20kegiatan%20%2AKaderisasi%20Tingkat%20Dasar%2A%20%20dan%20%2APekan%20Penerimaan%20Anggota%20Baru%2A%20DPC%20GMNI%20Depok%202024.%20Anda%20dipersilakan%20untuk%20masuk%20ke%20grup%20WhatsApp%20berikut%3A%0A%0A-%20%2AKTD%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FLpjupKAvskrEPwFygVTT6C%0A%0A-%20%2APPAB%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FJSp3u0Fm6Vd1GcZwyoeJef'">{{
+          <!-- if peserta ktd/ppab dikirim nomor telpon berbeda -->
+          <a v-if="peserta.peserta.status_pendaftaran == 'Peserta KTD dan PPAB'"
+            :href="'https://wa.me/' + peserta.peserta.Phone + '?text=Hallo%20Bung%2FSarinah%21%20%0A%0ADalam%20rangka%20pelaksanaan%20rangkaian%20kegiatan%20%2AKaderisasi%20Tingkat%20Dasar%2A%20%20dan%20%2APekan%20Penerimaan%20Anggota%20Baru%2A%20DPC%20GMNI%20Depok%202024.%20Anda%20dipersilakan%20untuk%20masuk%20ke%20grup%20WhatsApp%20berikut%3A%0A%0A-%20%2AKTD%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FLpjupKAvskrEPwFygVTT6C%0A%0A-%20%2APPAB%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FJSp3u0Fm6Vd1GcZwyoeJef%0A%0ATerima%20kasihh'">{{
+          peserta.peserta.Phone }}</a>
+
+          <a v-if="peserta.peserta.status_pendaftaran == 'Peserta KTD'"
+            :href="'https://wa.me/' + peserta.peserta.Phone + '?text=Hallo%20Bung%2FSarinah%21%20%0A%0ADalam%20rangka%20pelaksanaan%20rangkaian%20kegiatan%20%2AKaderisasi%20Tingkat%20Dasar%2A%20DPC%20GMNI%20Depok%202024.%20Anda%20dipersilakan%20untuk%20masuk%20ke%20grup%20WhatsApp%20berikut%3A%0A%0A-%20%2AKTD%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FLpjupKAvskrEPwFygVTT6C%0A%0ATerima%20kasihh'">{{
+          peserta.peserta.Phone }}</a>
+
+          <a v-if="peserta.peserta.status_pendaftaran == 'Peserta PPAB'"
+            :href="'https://wa.me/' + peserta.peserta.Phone + '?text=Hallo%20Bung%2FSarinah%21%20%0A%0ADalam%20rangka%20pelaksanaan%20rangkaian%20kegiatan%20%2APekan%20Penerimaan%20Anggota%20Baru%2A%20DPC%20GMNI%20Depok%202024.%20Anda%20dipersilakan%20untuk%20masuk%20ke%20grup%20WhatsApp%20berikut%3A%0A%0A-%20%2APPAB%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FJSp3u0Fm6Vd1GcZwyoeJef%0A%0ATerima%20kasihh'">{{
           peserta.peserta.Phone }}</a>
           <hr>
         </div>
@@ -38,27 +47,27 @@ export default {
       pesertas: [],
       filteredPeserta: [],
       selectedFilter: 'Semua',
-      waktu: '',
+      // waktu: '',
     }
   },
 
   mounted() {
     this.semuaPeserta();
 
-    // Mendapatkan waktu saat ini
-    var now = new Date();
-    var currentHour = now.getHours();
+    // // Mendapatkan waktu saat ini
+    // var now = new Date();
+    // var currentHour = now.getHours();
 
-    // Mengecek jam untuk menentukan pesan salam yang tepat
-    if (currentHour >= 3 && currentHour < 10) {
-      this.waktu = "Pagi"
-    } else if (currentHour >= 10 && currentHour < 15) {
-      this.waktu = "Siang"
-    } else if (currentHour >= 15 && currentHour < 18) {
-      this.waktu = "Sore"
-    } else {
-      this.waktu = "Malam"
-    }
+    // // Mengecek jam untuk menentukan pesan salam yang tepat
+    // if (currentHour >= 3 && currentHour < 10) {
+    //   this.waktu = "Pagi"
+    // } else if (currentHour >= 10 && currentHour < 15) {
+    //   this.waktu = "Siang"
+    // } else if (currentHour >= 15 && currentHour < 18) {
+    //   this.waktu = "Sore"
+    // } else {
+    //   this.waktu = "Malam"
+    // }
   },
 
   computed: {
