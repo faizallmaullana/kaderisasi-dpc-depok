@@ -15,7 +15,7 @@
       <div class="listCard">
         <div class="peserta" v-for="(peserta, index) in filteredPeserta" :key="index">
           <!-- <h3><router-link :to="{path: '/peserta/' + peserta.peserta.Phone}">{{ peserta.peserta.Nama }}</router-link></h3> -->
-          <h3 @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
+          <h3 class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
           <h5>{{ peserta.status_pendaftaran }}</h5>
           <p>Komisariat {{ peserta.peserta.Komisariat }} | {{ peserta.peserta.Universitas }}</p>
           <!-- if peserta ktd/ppab dikirim nomor telpon berbeda -->
@@ -35,7 +35,7 @@
       </div>
       <div class="floating" v-if="statusDataPeserta">
         <div class="content">
-          <PesertaCard :dataPeserta="dataPeserta" />
+          <PesertaCard :dataPeserta="dataPeserta" @backResponse="clearAlert"/>
         </div>
       </div>
     </article>
@@ -99,6 +99,11 @@ export default {
       } catch (err) {
         console.error(err);
       }
+    },
+
+    clearAlert() {
+      this.dataPeserta = [];
+      this.statusDataPeserta = false;
     },
 
     showDataPeserta(index) {
@@ -169,6 +174,10 @@ export default {
 
 .listCard .peserta p {
   margin-block-end: 7px;
+}
+
+.listCard h3.name {
+  cursor: pointer;
 }
 </style>
 
