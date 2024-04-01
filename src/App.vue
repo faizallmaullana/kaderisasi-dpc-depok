@@ -32,7 +32,12 @@ export default {
 
     isAuth() {
       // Check if the current route is one of the specified pages
-      const validPages = ['AdmHomePage', 'DatabaseManagement', "AdmDaftarPeserta"];
+      const validPages = [
+        'AdmHomePage', 
+        'DatabaseManagement', 
+        "AdmDaftarPeserta", 
+        "DataPesertaPage"
+      ];
       return validPages.includes(this.$route.name);
     },
   },

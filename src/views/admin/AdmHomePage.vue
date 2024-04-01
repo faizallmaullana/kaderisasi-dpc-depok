@@ -14,7 +14,8 @@
 
       <div class="listCard">
         <div class="peserta" v-for="(peserta, index) in filteredPeserta" :key="index">
-          <h3>{{ peserta.peserta.Nama }}</h3>
+          <!-- <h3><router-link :to="{path: '/peserta/' + peserta.peserta.Phone}">{{ peserta.peserta.Nama }}</router-link></h3> -->
+          <h3 @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
           <h5>{{ peserta.status_pendaftaran }}</h5>
           <p>Komisariat {{ peserta.peserta.Komisariat }} | {{ peserta.peserta.Universitas }}</p>
           <!-- if peserta ktd/ppab dikirim nomor telpon berbeda -->
@@ -32,18 +33,30 @@
           <hr>
         </div>
       </div>
+      <div class="floating" v-if="statusDataPeserta">
+        <div class="content">
+          <PesertaCard :dataPeserta="dataPeserta" />
+        </div>
+      </div>
     </article>
   </div>
 </template>
 
 <script>
 import { axios } from '@/axios/config.js';
+import PesertaCard from '@/components/PesertaCard.vue';
 
 export default {
   name: 'AdmDaftarPeserta',
 
+  components: {
+    PesertaCard,
+  },
+
   data() {
     return {
+      statusDataPeserta: false,
+      dataPeserta: [],
       pesertas: [],
       filteredPeserta: [],
       selectedFilter: 'Semua',
@@ -86,6 +99,12 @@ export default {
       } catch (err) {
         console.error(err);
       }
+    },
+
+    showDataPeserta(index) {
+      const dataPeserta = this.pesertas[index];
+      this.dataPeserta = dataPeserta;
+      this.statusDataPeserta = true;
     },
 
     // Method to filter by KTD

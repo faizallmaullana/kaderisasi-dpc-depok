@@ -37,6 +37,11 @@ const routes = [
     component: () => import('../views/admin/AdmHomePage.vue')
   },
   {
+    path: '/peserta/:phone',
+    name: 'DataPesertaPage',
+    component: () => import('../views/admin/DataPesertaPage.vue')
+  },
+  {
     path: '/database',
     name: 'DatabaseManagement',
     component: () => import('../views/admin/DatabaseManagement.vue')
