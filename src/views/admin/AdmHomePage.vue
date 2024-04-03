@@ -7,10 +7,12 @@
         <button @click="showAll">Semua Peserta</button>
       </div>
 
-      <br>
+      <h2 v-if="selectedFilter != 'Semua'" style="margin-block-end:0.5em">Peserta {{ selectedFilter }}</h2>
+      <h2 v-else style="margin-block-end:0.5em">{{ selectedFilter }} Peserta</h2>
 
-      <h2 v-if="selectedFilter != 'Semua'">Peserta {{ selectedFilter }}</h2>
-      <h2 v-else>{{ selectedFilter }} Peserta</h2>
+      <a v-if="selectedFilter != 'Semua'" @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar
+        Peserta {{ selectedFilter }}</a>
+      <a v-else @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar {{ selectedFilter }} Peserta</a>
 
       <div class="listCard">
         <div class="peserta" v-for="(peserta, index) in filteredPeserta" :key="index">
@@ -35,7 +37,7 @@
       </div>
       <div class="floating" v-if="statusDataPeserta">
         <div class="content">
-          <PesertaCard :dataPeserta="dataPeserta" @backResponse="clearAlert"/>
+          <PesertaCard :dataPeserta="dataPeserta" @backResponse="clearAlert" />
         </div>
       </div>
     </article>
@@ -66,21 +68,6 @@ export default {
 
   mounted() {
     this.semuaPeserta();
-
-    // // Mendapatkan waktu saat ini
-    // var now = new Date();
-    // var currentHour = now.getHours();
-
-    // // Mengecek jam untuk menentukan pesan salam yang tepat
-    // if (currentHour >= 3 && currentHour < 10) {
-    //   this.waktu = "Pagi"
-    // } else if (currentHour >= 10 && currentHour < 15) {
-    //   this.waktu = "Siang"
-    // } else if (currentHour >= 15 && currentHour < 18) {
-    //   this.waktu = "Sore"
-    // } else {
-    //   this.waktu = "Malam"
-    // }
   },
 
   computed: {
@@ -95,6 +82,7 @@ export default {
         const result = await axios.get(`/peserta`);
         result.data.peserta.sort((a, b) => (a.peserta.Nama > b.peserta.Nama) ? 1 : -1);
         this.pesertas = result.data.peserta;
+        console.log(this.pesertas)
         this.filteredPeserta = this.pesertas; // Initialize filteredPeserta with all pesertas
       } catch (err) {
         console.error(err);
@@ -128,6 +116,52 @@ export default {
     showAll() {
       this.selectedFilter = 'Semua';
       this.filteredPeserta = this.pesertas;
+    },
+
+    convertJSONtoCSV() {
+      console.log("berhasil hore")
+
+      let csvContent = "data:text/csv;charset=utf-8,";
+
+      // Headers
+      let objNama = Object.keys(this.filteredPeserta[0].peserta.Nama).join(",")
+
+      console.log(objNama)
+
+      csvContent += "Nama\t" + "Komisariat\t" + "Universitas\t" + "Cabang\t" + "Email\t" + "WhatsApp\t" + "Status Peserta\n";
+
+      console.log(csvContent)
+
+      // Rows
+      this.filteredPeserta.forEach(item => {
+        let values = [];
+        values.push(item.peserta["Nama"]); // Add Nama
+        values.push(item.peserta["Komisariat"]); // Add Alamat
+        values.push(item.peserta["Universitas"]); // Add Alamat
+        values.push(item.peserta["Cabang"]); // Add Alamat
+        values.push(item.peserta["Email"]); // Add Alamat
+        values.push(item.peserta["Phone"]); // Add Alamat
+        values.push(item["status_pendaftaran"]); // Add Alamat
+        csvContent += values.join(",") + "\n";
+      });
+
+
+      // Create a link element
+      const link = document.createElement("a");
+      link.setAttribute("href", encodeURI(csvContent));
+      link.setAttribute("download", "data.csv");
+
+      console.log(csvContent)
+
+
+      // Append the link to the body
+      document.body.appendChild(link);
+
+      // Trigger the click event on the link
+      link.click();
+
+      // Clean up
+      document.body.removeChild(link);
     }
   },
 }
@@ -161,6 +195,10 @@ export default {
 
 .listCard .peserta h3 {
   margin-block: 0;
+}
+
+a {
+  cursor: pointer;
 }
 
 .listCard .peserta a {
