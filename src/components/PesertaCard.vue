@@ -278,11 +278,3 @@ p.statusPendaftaran {
   width: 30%;
 }
 </style>
-
-<style scoped>
-@media screen and (max-width:768px) {
-  .floating .content {
-    padding: 0;
-  }
-}
-</style>
