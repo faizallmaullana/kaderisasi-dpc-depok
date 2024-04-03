@@ -1,7 +1,7 @@
 <template>
   <div class="floating">
     <div class="content">
-      <div class="article">
+      <div class="article" v-if="!statusEditData">
         <img src="@/assets/logo.png" alt="">
         <h2>{{ dataPeserta.peserta.Nama }}</h2>
         <p class="statusPendaftaran">{{ dataPeserta.status_pendaftaran }}</p>
@@ -25,22 +25,147 @@
             </tr>
           </td>
         </table>
-
       </div>
-      <div class="bt-divide">
+
+      <form @submit.prevent="submitData" class="editData" v-if="statusEditData">
+        <span class="inputEditData">
+          <label for="">Nama</label>
+          <input type="text" placeholder="nama" v-model="Nama">
+        </span>
+
+        <span class="inputEditData">
+          <label for="">Komisariat</label>
+          <input type="text" placeholder="Komisariat..." v-model="Komisariat">
+        </span>
+
+        <span class="inputEditData">
+          <label for="">Universitas</label>
+          <input type="text" placeholder="Universitas..." v-model="Universitas">
+        </span>
+
+        <span class="inputEditData">
+          <label for="">Cabang</label>
+          <input type="text" placeholder="Cabang..." v-model="Cabang">
+        </span>
+
+        <span class="inputEditData">
+          <label for="">Email</label>
+          <input type="email" placeholder="Email..." v-model="Email">
+        </span>
+
+        <span class="inputEditData">
+          <label for="">WhatsApp</label>
+          <input type="text" placeholder="Nomor WhatsApp" v-model="Phone">
+        </span>
+
+        <span class="inputEditData exept">
+          <label for="">Status Peserta</label>
+          <span class="divideCheck">
+            <span class="check">
+              <input id="isKtd" type="checkbox" v-model="IsKtd">
+              <label for="isKtd">Peserta KTD</label>
+            </span>
+            <span class="check">
+              <input id="isWillPpab" type="checkbox" v-model="IsWillPpab">
+              <label for="isWillPpab">Peserta PPAB</label>
+            </span>
+          </span>
+        </span>
+
+        <input type="submit" value="Ubah Data!" class="inputButton" style="margin-top: 20px;"/>
+
+      </form>
+
+      <div class="bt-divide" v-if="!statusEditData">
         <button @click="$emit('backResponse', false)" class="secondary">Kembali</button>
-        <button @click="pushPendaftaran">Ubah Data</button>
+        <button @click="ubahData">Ubah Data</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { toProperCase } from "@/assets/js/toProperCase.js";
+import { axios } from "@/axios/config.js"
+
 export default {
   name: 'PesertaCard',
 
+  data() {
+    return {
+      statusEditData: false,
+
+      ID: this.dataPeserta.peserta.ID,
+      Nama: this.dataPeserta.peserta.Nama,
+      Komisariat: this.dataPeserta.peserta.Komisariat,
+      Universitas: this.dataPeserta.peserta.Universitas,
+      Cabang: this.dataPeserta.peserta.Cabang,
+      Email: this.dataPeserta.peserta.Email,
+      Phone: this.dataPeserta.peserta.Phone,
+      IsKtd: this.dataPeserta.peserta.IsKtd,
+      IsWillPpab: this.dataPeserta.peserta.IsWillPpab,
+      IsPpab: this.dataPeserta.peserta.IsPpab,
+    }
+  },
+
   props: {
     dataPeserta: Object,
+  },
+
+  methods: {
+    ubahData() {
+      this.statusEditData = true;
+    },
+
+    deleteData() {
+      axios.delete(`/peserta/${this.ID}`)
+    },
+
+    async submitData() {
+
+      // hati hati sangat komplek dan membingungkan
+
+      let ktd = this.IsKtd;
+      let ppab = this.IsPpab;
+      let willPpab = this.IsWillPpab;
+
+
+      if (ktd === true && willPpab === true) {
+        willPpab = true;
+        ppab = false;
+      } else if (ktd === true && willPpab === false) {
+        willPpab = false;
+        ppab = true;
+      } else if (ktd === false && willPpab === true) {
+        willPpab = true;
+        ppab = false;
+      } else {
+        this.deleteData();
+        window.location.reload();
+        return
+      }
+
+      const data = {
+        Nama: toProperCase(this.Nama),
+        Email: this.Email,
+        Phone: this.Phone,
+        komisariat: this.Komisariat,
+        Universitas: this.Universitas,
+        Cabang: this.Cabang,
+        IsKtd: ktd.toString(),
+        IsPpab: ppab.toString(),
+        IsWillPpab: willPpab.toString(),
+      };
+
+      try {
+        await axios.put(`/peserta/${this.ID}`, data);
+        window.location.reload();
+      }
+      catch (error) {
+        console.log(error);
+        // this.$router.push(`/status/08`);
+      }
+    }
   }
 }
 </script>
@@ -64,12 +189,14 @@ export default {
 .floating .content {
   background-color: white;
   width: 80vw;
+  max-height: 90vh;
   border-radius: 8px;
   max-width: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2em 1em;
+  gap: 20px;
 }
 
 .floating table {
@@ -77,10 +204,10 @@ export default {
   border-spacing: 10px;
 }
 
-.floating table td{
+.floating table td {
   max-width: 30%;
   overflow-wrap: break-word;
-  word-break: break-all; 
+  word-break: break-all;
 }
 
 
@@ -95,5 +222,67 @@ p.statusPendaftaran {
 
 .floating .bt-divide {
   width: 80% !important;
+}
+
+.floating form.editData {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  gap: 10px;
+}
+
+.floating form.editData span.inputEditData {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.floating form.editData span.exept {
+  justify-content: flex-start !important;
+}
+
+.floating form.editData span.check {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.floating form.editData span.check label {
+  width: auto;
+}
+
+.floating form.editData span.check input {
+  width: auto;
+}
+
+.floating form.editData span.divideCheck {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+
+
+.floating form.editData input {
+  margin: 0;
+  width: 70%;
+}
+
+.floating form.editData label {
+  margin: 0;
+  width: 30%;
+}
+</style>
+
+<style scoped>
+@media screen and (max-width:768px) {
+  .floating .content {
+    padding: 0;
+  }
 }
 </style>

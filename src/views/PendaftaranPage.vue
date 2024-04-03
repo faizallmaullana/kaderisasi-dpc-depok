@@ -7,8 +7,8 @@ export default {
 
   data() {
     return {
-      isppab: '',
-      isktd: '',
+      isppab: 'false',
+      isktd: 'true',
       isWillPpab: '',
       nama: '',
       email: '',
@@ -16,11 +16,19 @@ export default {
       komisariat: '',
       universitas: '',
       cabang: 'Depok',
+
+      statusMessage: false,
     }
   },
 
   methods: {
     async submitData() {
+      const willPpab = this.isWillPpab;
+      if(willPpab === '') {
+        this.statusMessage = true;
+        return;
+      }
+
       const data = {
         Nama: toProperCase(this.nama),
         Email: this.email,
@@ -35,11 +43,11 @@ export default {
 
       try {
         const result = await axios.post("/pendaftaran", data);
-        const phone = result.data.peserta.Phone
-        this.$router.push(`/status/${phone}`)
+        const phone = result.data.peserta.Phone;
+        this.$router.push(`/status/${phone}`);
       }
       catch (error) {
-        this.$router.push(`/status/08`)
+        this.$router.push(`/status/08`);
       }
     }
   }
@@ -70,9 +78,6 @@ export default {
         <p style="color:var(--red); font-weight: 600;">PEJUANG PEMIKIR - PEMIKIR PEJUANG</p>
       </div>
 
-      <hr>
-      <br>
-
       <form @submit.prevent="submitData" class="wrapper">
         <div class="divider">
           <h3>Identitas</h3>
@@ -100,24 +105,10 @@ export default {
 
         <form class="kesediaan"> -->
         <div class="divider">
-          <h3>Kesediaan Mengikuti KTD</h3>
+          <h3>Kesediaan Mengikuti Kegiatan</h3>
 
-          <label for="" class="formRight">Apakah Anda bersedia untuk mengikuti Kaderisasi Tingkat Dasar DPC GMNI
-            Depok 2024?</label>
-          <div class="radio">
-            <span>
-              <input id="bersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox" value="true">
-              <label for="bersediaKTD">Saya <strong>bersedia</strong></label>
-            </span>
 
-            <span>
-              <input id="tidakBersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox"
-                value="false">
-              <label for="tidakBersediaKTD">Saya <strong>tidak bersedia</strong></label>
-            </span>
-          </div>
-
-          <label for="" class="formRight">Apakah Anda sudah mengikuti Pekan Penerimaan Anggota Baru (PPAB)?</label>
+          <label for="" class="formRight">Apakah Anda sudah mengikuti <strong class="em">Pekan Penerimaan Anggota Baru (PPAB)</strong>?</label>
           <div class="radio">
             <span>
               <input type="radio" id="ppabTrue" v-model="isppab" placeholder="Nama" class="checkbox" value="true">
@@ -154,9 +145,38 @@ export default {
             </span>
           </div>
 
+          <label for="" class="formRight">Apakah Anda bersedia untuk mengikuti <strong class="em">Kaderisasi Tingkat Dasar (KTD)</strong> DPC GMNI
+            Depok 2024?</label>
+          <div class="radio">
+            <span>
+              <input id="bersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox" value="true">
+              <label for="bersediaKTD">Saya <strong>bersedia</strong></label>
+            </span>
+
+            <span>
+              <input id="tidakBersediaKTD" type="radio" v-model="isktd" placeholder="Nama" class="checkbox"
+                value="false">
+              <label for="tidakBersediaKTD">Saya <strong>tidak bersedia</strong></label>
+            </span>
+          </div>
+
+          <p v-if="statusMessage" class="em">Semua kolom harus terisi</p>
+
           <input type="submit" value="Submit" class="inputButton">
         </div>
       </form>
     </article>
   </div>
 </template>
+
+<style scoped>
+strong.em {
+  color: var(--red)
+}
+
+p.em{
+  color: var(--red);
+  font-style: italic;
+  text-decoration: underline;
+}
+</style>
