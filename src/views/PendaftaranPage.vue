@@ -24,6 +24,7 @@ export default {
   methods: {
     async submitData() {
       const willPpab = this.isWillPpab;
+      if (this.IsPpab == 'false')
       if(willPpab === '') {
         this.statusMessage = true;
         return;
@@ -33,7 +34,7 @@ export default {
         Nama: toProperCase(this.nama),
         Email: this.email,
         Phone: this.phone,
-        komisariat: this.komisariat,
+        Komisariat: this.komisariat,
         Universitas: this.universitas,
         Cabang: this.cabang,
         IsKtd: this.isktd,
