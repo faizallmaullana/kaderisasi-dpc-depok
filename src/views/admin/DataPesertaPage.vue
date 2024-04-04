@@ -33,7 +33,6 @@ export default {
     async GetDataPeserta() {
       const result = await axios.get(`/peserta/${this.phoneNumber}`);
       this.peserta = result.data.peserta;
-      console.log(result.data.peserta);
     }
   }
 }

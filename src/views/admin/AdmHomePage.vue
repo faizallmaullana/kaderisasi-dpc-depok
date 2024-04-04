@@ -17,10 +17,29 @@
       <div class="listCard">
         <div class="peserta" v-for="(peserta, index) in filteredPeserta" :key="index">
           <!-- <h3><router-link :to="{path: '/peserta/' + peserta.peserta.Phone}">{{ peserta.peserta.Nama }}</router-link></h3> -->
-          <h3 class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
-          <h5>{{ peserta.status_pendaftaran }}</h5>
+
+          <div class="profile">
+            <span>
+              <h3 class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
+              <h5>{{ peserta.status_pendaftaran }}</h5>
+            </span>
+
+            <div v-if="selectedFilter != 'Semua'" class="kehadiran">
+              <label for="hadir" style="color: var(--red);">Presensi</label>
+              <input v-if="selectedFilter == 'KTD'" id="hadir" type="checkbox"
+                @click="presensiKehadiran(selectedFilter, peserta.peserta.ID, peserta.ktd_hadir)"
+                :checked="peserta.ktd_hadir">
+              <input v-if="selectedFilter == 'PPAB'" id="hadir" type="checkbox"
+                @click="presensiKehadiran(selectedFilter, peserta.peserta.ID, peserta.ppab_hadir)"
+                :checked="peserta.ppab_hadir">
+            </div>
+
+          </div>
+
           <p>Komisariat {{ peserta.peserta.Komisariat }} | {{ peserta.peserta.Universitas }}</p>
+
           <!-- if peserta ktd/ppab dikirim nomor telpon berbeda -->
+
           <a v-if="peserta.status_pendaftaran == 'Peserta KTD dan PPAB'"
             :href="'https://wa.me/' + peserta.peserta.Phone + '?text=Hallo%20Bung%2FSarinah%21%20%0A%0ADalam%20rangka%20pelaksanaan%20rangkaian%20kegiatan%20%2AKaderisasi%20Tingkat%20Dasar%2A%20%20dan%20%2APekan%20Penerimaan%20Anggota%20Baru%2A%20DPC%20GMNI%20Depok%202024.%20Anda%20dipersilakan%20untuk%20masuk%20ke%20grup%20WhatsApp%20berikut%3A%0A%0A-%20%2AKTD%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FLpjupKAvskrEPwFygVTT6C%0A%0A-%20%2APPAB%2A%20%0Ahttps%3A%2F%2Fchat.whatsapp.com%2FJSp3u0Fm6Vd1GcZwyoeJef%0A%0ATerima%20kasihh'">{{
           peserta.peserta.Phone }}</a>
@@ -63,6 +82,8 @@ export default {
       filteredPeserta: [],
       selectedFilter: 'Semua',
       // waktu: '',
+
+      buttonKehadiran: 'Absen',
     }
   },
 
@@ -82,7 +103,7 @@ export default {
         const result = await axios.get(`/peserta`);
         result.data.peserta.sort((a, b) => (a.peserta.Nama > b.peserta.Nama) ? 1 : -1);
         this.pesertas = result.data.peserta;
-        console.log(this.pesertas)
+        console.warn(result)
         this.filteredPeserta = this.pesertas; // Initialize filteredPeserta with all pesertas
       } catch (err) {
         console.error(err);
@@ -103,7 +124,7 @@ export default {
     // Method to filter by KTD
     filterByKTD() {
       this.selectedFilter = 'KTD';
-      this.filteredPeserta = this.pesertas.filter(peserta => peserta.peserta.IsKtd && peserta.peserta.IsPpab);
+      this.filteredPeserta = this.pesertas.filter(peserta => peserta.peserta.IsKtd && (peserta.peserta.IsPpab || peserta.ppab_hadir));
     },
 
     // Method to filter by Not KTD
@@ -118,6 +139,40 @@ export default {
       this.filteredPeserta = this.pesertas;
     },
 
+    async presensiKehadiran(tipePeserta, idPeserta, statusKehadiran) {
+      console.warn(tipePeserta);
+      console.warn(idPeserta)
+      console.warn(statusKehadiran)
+      console.log(this.pesertas)
+
+      // Update the statusKehadiran based on the selectedFilter
+      this.pesertas.forEach(peserta => {
+        if (peserta.peserta.ID === idPeserta) {
+          if (tipePeserta === 'KTD') {
+            peserta.ktd_hadir = !statusKehadiran;
+          } else if (tipePeserta === 'PPAB') {
+            peserta.ppab_hadir = !statusKehadiran;
+          }
+        }
+      });
+
+      if (statusKehadiran == false) {
+        // Assuming your backend API call to update the statusKehadiran
+        const result = await axios.post(`/presensi/${tipePeserta}/${idPeserta}`);
+        console.warn(result);
+      }
+
+      else if (statusKehadiran == true) {
+        const result = await axios.delete(`/presensi/${tipePeserta}/${idPeserta}`);
+        console.warn(result);
+      }
+
+      // Optionally, you can refresh the filteredPeserta list to reflect the changes immediately
+      // this.filteredPeserta = [...this.pesertas];
+
+      // If you don't want to refresh the entire list, you can just update the specific peserta object in filteredPeserta
+    },
+
     convertJSONtoCSV() {
       console.log("berhasil hore")
 
@@ -128,9 +183,10 @@ export default {
 
       console.log(objNama)
 
-      csvContent += "Nama\t" + "Komisariat\t" + "Universitas\t" + "Cabang\t" + "Email\t" + "WhatsApp\t" + "Status Peserta\n";
+      csvContent += "Nama\t" + "Komisariat\t" + "Universitas\t" + "Cabang\t" + "Email\t" + "WhatsApp\t" + "Status Peserta\t" + "Presensi PPAB\t" + "Presensi KTD\n";
 
       console.log(csvContent)
+      console.log(this.selectedFilter)
 
       // Rows
       this.filteredPeserta.forEach(item => {
@@ -142,6 +198,8 @@ export default {
         values.push(item.peserta["Email"]); // Add Alamat
         values.push(item.peserta["Phone"]); // Add Alamat
         values.push(item["status_pendaftaran"]); // Add Alamat
+        values.push(item["ppab_hadir"]); // Add Alamat
+        values.push(item["ktd_hadir"]); // Add Alamat
         csvContent += values.join(",") + "\n";
       });
 
@@ -216,6 +274,18 @@ a {
 
 .listCard h3.name {
   cursor: pointer;
+}
+
+.listCard .profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listCard .profile .kehadiran {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 </style>
 

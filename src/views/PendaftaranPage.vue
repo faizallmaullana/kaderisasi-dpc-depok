@@ -68,7 +68,7 @@ export default {
       <div class="header">
         <h1>Formulir Pendaftaran</h1>
         <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar dan Pekan Penerimaan Anggota Baru</h2>
-        <h2 style="color:var(--red)">DPC GMNI DEPOK 2024</h2>
+        <h3>DPC GMNI DEPOK 2024</h3>
 
         <p>Halo, Bung dan Sarinah</p>
         <p>Terima kasih atas ketersediaan Anda untuk mengisi formulir registrasi ini. Untuk informasi lebih lanjut dan

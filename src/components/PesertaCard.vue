@@ -162,7 +162,7 @@ export default {
         window.location.reload();
       }
       catch (error) {
-        console.log(error);
+        console.error(error);
         // this.$router.push(`/status/08`);
       }
     }

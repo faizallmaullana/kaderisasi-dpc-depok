@@ -59,7 +59,7 @@ export default {
         this.token = true;
         this.NomorToken = token;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   },
