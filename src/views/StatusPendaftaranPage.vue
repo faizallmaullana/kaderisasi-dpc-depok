@@ -44,8 +44,11 @@
         <div v-if="status == ''" class="dataPeserta">
           <h2>{{ peserta.Nama }}</h2>
           <p>Komisariat {{ peserta.Komisariat }} | {{ peserta.Universitas }}</p>
+          <p>Sebelum mengikuti Kaderisasi Tingkat Dasar, anda harus melaksanakan <strong>tugas singkat</strong> di link berikut.</p>
+          <p>Tugas harus dikirim selambat-lambatnya pada <strong>Kamis, 18 April 2024, pukul 23.59.</strong></p>
+          <br>
+          <button @click="pushToTugas">Tugas KTD</button>
         </div>
-
       </section>
     </div>
   </div>
@@ -106,6 +109,10 @@ export default {
     pushPendaftaran() {
       this.$router.push({ name: 'PendaftaranPage' });
     },
+
+    pushToTugas() {
+      this.$router.push({ name: 'PengumpulanTugasPage' });
+    }
   }
 }
 </script>

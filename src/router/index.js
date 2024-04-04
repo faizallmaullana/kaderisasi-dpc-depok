@@ -16,6 +16,11 @@ const routes = [
     name: 'StatusPendaftaranPage',
     component: () => import('../views/StatusPendaftaranPage.vue')
   },
+  {
+    path: '/pengumpulan/tugas',
+    name: 'PengumpulanTugasPage',
+    component: () => import('../views/TugasPage.vue')
+  },
 
   // auth
 
@@ -40,6 +45,11 @@ const routes = [
     path: '/peserta/:phone',
     name: 'DataPesertaPage',
     component: () => import('../views/admin/DataPesertaPage.vue')
+  },
+  {
+    path: '/tugas/deskripsi',
+    name: 'DeskripsiTugasPage',
+    component: () => import('../views/admin/DeskripsiTugasPage.vue')
   },
   {
     path: '/database',

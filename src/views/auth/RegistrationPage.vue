@@ -71,7 +71,7 @@ export default {
           this.alertStatus = true;
         } else {
           this.submitConfirmation();
-          // console.log(error);
+          // console.error(error);
         }
       }
     },

@@ -198,4 +198,9 @@ form.kesediaan label {
     gap: 0;
     border-radius: 10px;
   }
+
+  .heroImage img {
+    height: 200px !important;
+  }
+  
 }

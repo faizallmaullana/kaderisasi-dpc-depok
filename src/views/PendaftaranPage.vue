@@ -100,6 +100,7 @@ export default {
 
           <label for="cabang">Cabang</label>
           <input type="text" id="cabang" v-model="cabang" placeholder="Asal Cabang..." required>
+          
         </div>
 
         <!-- </form>
@@ -162,8 +163,9 @@ export default {
           </div>
 
           <p v-if="statusMessage" class="em">Semua kolom harus terisi</p>
-
           <input type="submit" value="Submit" class="inputButton">
+          <p>*Setelah melakukan pendaftaran, anda akan diarahkan untuk mengerjakan sebuah tugas singkat</p>
+
         </div>
       </form>
     </article>

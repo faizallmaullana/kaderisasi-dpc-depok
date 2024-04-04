@@ -103,7 +103,6 @@ export default {
         const result = await axios.get(`/peserta`);
         result.data.peserta.sort((a, b) => (a.peserta.Nama > b.peserta.Nama) ? 1 : -1);
         this.pesertas = result.data.peserta;
-        console.warn(result)
         this.filteredPeserta = this.pesertas; // Initialize filteredPeserta with all pesertas
       } catch (err) {
         console.error(err);
@@ -140,11 +139,6 @@ export default {
     },
 
     async presensiKehadiran(tipePeserta, idPeserta, statusKehadiran) {
-      console.warn(tipePeserta);
-      console.warn(idPeserta)
-      console.warn(statusKehadiran)
-      console.log(this.pesertas)
-
       // Update the statusKehadiran based on the selectedFilter
       this.pesertas.forEach(peserta => {
         if (peserta.peserta.ID === idPeserta) {
@@ -158,13 +152,11 @@ export default {
 
       if (statusKehadiran == false) {
         // Assuming your backend API call to update the statusKehadiran
-        const result = await axios.post(`/presensi/${tipePeserta}/${idPeserta}`);
-        console.warn(result);
+        await axios.post(`/presensi/${tipePeserta}/${idPeserta}`);
       }
 
       else if (statusKehadiran == true) {
-        const result = await axios.delete(`/presensi/${tipePeserta}/${idPeserta}`);
-        console.warn(result);
+        await axios.delete(`/presensi/${tipePeserta}/${idPeserta}`);
       }
 
       // Optionally, you can refresh the filteredPeserta list to reflect the changes immediately
@@ -174,19 +166,11 @@ export default {
     },
 
     convertJSONtoCSV() {
-      console.log("berhasil hore")
 
       let csvContent = "data:text/csv;charset=utf-8,";
 
       // Headers
-      let objNama = Object.keys(this.filteredPeserta[0].peserta.Nama).join(",")
-
-      console.log(objNama)
-
       csvContent += "Nama\t" + "Komisariat\t" + "Universitas\t" + "Cabang\t" + "Email\t" + "WhatsApp\t" + "Status Peserta\t" + "Presensi PPAB\t" + "Presensi KTD\n";
-
-      console.log(csvContent)
-      console.log(this.selectedFilter)
 
       // Rows
       this.filteredPeserta.forEach(item => {
@@ -208,9 +192,6 @@ export default {
       const link = document.createElement("a");
       link.setAttribute("href", encodeURI(csvContent));
       link.setAttribute("download", "data.csv");
-
-      console.log(csvContent)
-
 
       // Append the link to the body
       document.body.appendChild(link);

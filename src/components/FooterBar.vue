@@ -1,9 +1,10 @@
 <template>
       <footer>
       <div class="wrapper">
-        <span @click="pushToHome" class="logo">
-          <img src="@/assets/home.png" alt="Home">
-          <h4>Home</h4>
+        <span class="logo">
+          <h4 @click="pushToHome">Home</h4>
+          <h4 @click="pushToTugas">Tugas KTD</h4>
+          <h4 @click="pushToPendaftaran">Pendaftaran</h4>
         </span>
 
         <hr style="width: 100%; transform: translateY(-10px);">
@@ -37,6 +38,14 @@ export default {
   methods: {
     pushToHome() {
       this.$router.push({ name: 'HomePage' })
+    },
+
+    pushToTugas() {
+      this.$router.push({ name: 'PengumpulanTugasPage' })
+    },
+
+    pushToPendaftaran() {
+      this.$router.push({ name: 'PendaftaranPage' })
     }
   }
 }

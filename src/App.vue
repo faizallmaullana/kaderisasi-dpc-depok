@@ -26,7 +26,7 @@ export default {
   computed: {
     isAnon() {
       // Check if the current route is one of the specified pages
-      const validPages = ['HomePage', 'PendaftaranPage', 'StatusPendaftaranPage'];
+      const validPages = ['HomePage', 'PendaftaranPage', 'StatusPendaftaranPage', 'PengumpulanTugasPage'];
       return validPages.includes(this.$route.name);
     },
 
@@ -36,7 +36,8 @@ export default {
         'AdmHomePage', 
         'DatabaseManagement', 
         "AdmDaftarPeserta", 
-        "DataPesertaPage"
+        "DataPesertaPage",
+        "DeskripsiTugasPage"
       ];
       return validPages.includes(this.$route.name);
     },
@@ -68,6 +69,7 @@ export default {
   --black: #2b2b2b;
   --white: #e6e6e6;
   --black2: #2c3e50;
+  line-height: 1.3 !important;
 }
 
 .container {
