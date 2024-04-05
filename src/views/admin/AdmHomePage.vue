@@ -7,7 +7,8 @@
         <button @click="showAll">Semua Peserta</button>
       </div>
 
-      <h2 v-if="selectedFilter != 'Semua'" style="margin-block-end:0.5em">Peserta {{ selectedFilter }} ({{ filteredPeserta.length }})</h2>
+      <h2 v-if="selectedFilter != 'Semua'" style="margin-block-end:0.5em">Peserta {{ selectedFilter }} ({{
+          filteredPeserta.length }})</h2>
       <h2 v-else style="margin-block-end:0.5em">{{ selectedFilter }} Peserta ({{ filteredPeserta.length }})</h2>
 
       <a v-if="selectedFilter != 'Semua'" @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar
@@ -15,12 +16,15 @@
       <a v-else @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar {{ selectedFilter }} Peserta</a>
 
       <div class="listCard">
-        <div class="peserta" v-for="(peserta, index) in filteredPeserta" :key="index">
+        <div class="peserta" v-for="(peserta, index) in  filteredPeserta " :key="index">
           <!-- <h3><router-link :to="{path: '/peserta/' + peserta.peserta.Phone}">{{ peserta.peserta.Nama }}</router-link></h3> -->
 
           <div class="profile">
             <span>
               <h3 class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
+              <h5>{{ peserta.status_pendaftaran }} <em>- <a v-if="peserta.essay_dikumpulkan"
+                    @click="downloadEssay(peserta.peserta.Phone)">essay</a></em></h5>
+
             </span>
 
             <div v-if="selectedFilter != 'Semua'" class="kehadiran">
@@ -206,7 +210,7 @@ export default {
       document.body.removeChild(link);
     },
 
-    async downloadFile(phone) {
+    async downloadEssay(phone) {
       try {
         // Replace 'file_id' with the actual ID of the file you want to download
         const result = await axios.get(`/pengumpulan/tugasName/${phone}`)

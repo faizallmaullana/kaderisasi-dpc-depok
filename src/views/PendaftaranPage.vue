@@ -164,7 +164,7 @@ export default {
 
           <p v-if="statusMessage" class="em">Semua kolom harus terisi</p>
           <input type="submit" value="Submit" class="inputButton">
-          <p>*Setelah melakukan pendaftaran, anda akan diarahkan untuk mengerjakan sebuah tugas singkat</p>
+          <p v-if="isktd == 'true'">*Setelah melakukan pendaftaran, anda akan diarahkan untuk mengerjakan sebuah tugas singkat</p>
 
         </div>
       </form>
