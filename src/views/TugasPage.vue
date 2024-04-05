@@ -5,27 +5,25 @@
 
       <p>{{ tugas }}</p>
       <hr>
-      <p>Tugas harus dikirim selambat-lambatnya pada <strong>Kamis, 18 April 2024, pukul 23.59.</strong></p>
+      <p>Tugas harus dikirim selambat-lambatnya pada <strong>Kamis, 18 April 2024, pukul 23.59</strong> menggunakan file
+        berformat <strong>.pdf</strong></p>
 
       <h3>Pengumpulan Tugas</h3>
     </div>
 
     <form @submit.prevent="submitData">
       <label for="phone">Nomor Telpon</label>
-      <input type="text" id="phone" placeholder="Nomor Telpon Terdaftar..." v-model="phone">
+      <input type="text" id="phone" placeholder="Nomor Telpon Terdaftar..." v-model="phone" required>
 
       <label for="title">Judul Karya</label>
-      <input type="text" id="title" placeholder="Judul Karya..." v-model="title">
+      <input type="text" id="title" placeholder="Judul Karya..." v-model="title" required>
 
       <label for="file">Upload Tugas</label>
-      <input type="file" id="file" @change="handleFileChange">
+      <input type="file" id="file" @change="handleFileChange" required>
 
       <p v-if="statusError">{{ statusError }}</p>
       <input type="submit" class="inputButton" value="Upload">
     </form>
-
-    <!-- Button to trigger file download -->
-    <!-- <button @click="downloadFile">Download File</button> -->
   </article>
 
   <div v-if="message" class="cardBerhasilTerkirim">
@@ -91,7 +89,23 @@ export default {
   methods: {
     handleFileChange(event) {
       // Capture the selected file
-      this.file = event.target.files[0];
+      const selectedFile = event.target.files[0];
+      const allowedExtensions = /(\.pdf)$/i;  // Regular expression for PDF files
+
+      // Check if the selected file has a valid extension
+      if (!allowedExtensions.test(selectedFile.name)) {
+        // Display an error message
+        this.statusError = "Hanya diijinkan mengirim file PDF";
+        // Clear the file input
+        event.target.value = null;
+        // Set the file to null
+        this.file = null;
+      } else {
+        // Reset error message if file is valid
+        this.statusError = "";
+        // Set the file to the selected file
+        this.file = selectedFile;
+      }
     },
 
     async getTugas() {
@@ -130,45 +144,30 @@ export default {
         this.idFile = result.data.id;
         this.submitMetaData();
       } catch (err) {
+        const statusCode = err.response.status;
         const errorMessage = err.response.data.message;
+
+        if (statusCode == 400) {
+          this.statusError = "Anda memasukan format nomor telpon yang tidak tepat"
+        } else if (statusCode == 406) {
+          this.statusError = "Nomor telpon tidak terdaftar";
+        } else if (statusCode == 409) {
+          this.statusError = "Anda sudah pernah mengirim tugas, silakan hubungi narahubung Faizal untuk mengirim ulang tugas Anda."
+        } else if (statusCode == 500) {
+          this.statusError = "Anda memasukan format nomor telpon yang salah"
+        } else {
+          this.statusError = "undefined error. Silahkan hubungi narahubung yang tertera"
+        }
+
         if (errorMessage === "nomor telpon tidak terdaftar") {
-          this.statusError = errorMessage;
+          this.statusError = 'Nomor Telpon tidak terdaftar';
+          return
         }
       }
     },
 
-    // ini nanti diisi ketika ingin melakukan download tugas
-    async downloadFile() {
-      try {
-        // Replace 'file_id' with the actual ID of the file you want to download
-        const fileID = '4d607662-bcba-4886-b67b-41e5ba191eb7';
-
-        // Send a GET request to download the file from the backend
-        const response = await axios.get(`/pengumpulan/tugas/${fileID}`, {
-          responseType: 'blob' // Set response type to 'blob' to handle binary data
-        });
-
-        // Create a blob URL for the file data
-        const blob = new Blob([response.data]);
-        const url = window.URL.createObjectURL(blob);
-
-        // Create an anchor element and trigger a download
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'file_name.csv'); // Replace 'file_name.extension' with the actual file name and extension
-        document.body.appendChild(link);
-        link.click();
-
-        // Clean up
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(link);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-
     pushToHome() {
-      this.$router.push({name: 'HomePage'})
+      this.$router.push({ name: 'HomePage' })
     }
   }
 }

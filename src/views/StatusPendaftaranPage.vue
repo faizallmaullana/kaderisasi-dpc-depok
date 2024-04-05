@@ -40,14 +40,18 @@
           </div>
         </div>
         <h3 v-else>Anda Terdaftar sebagai <em>{{ statusPeserta }}</em></h3>
-        
+
         <div v-if="status == ''" class="dataPeserta">
           <h2>{{ peserta.Nama }}</h2>
           <p>Komisariat {{ peserta.Komisariat }} | {{ peserta.Universitas }}</p>
-          <p>Sebelum mengikuti Kaderisasi Tingkat Dasar, anda harus melaksanakan <strong>tugas singkat</strong> di link berikut.</p>
-          <p>Tugas harus dikirim selambat-lambatnya pada <strong>Kamis, 18 April 2024, pukul 23.59.</strong></p>
-          <br>
-          <button @click="pushToTugas">Tugas KTD</button>
+          <span v-if="statusPeserta == 'Peserta KTD dan PPAB' || statusPeserta == 'Peserta KTD'"
+          style="margin-top: 10px;">
+            <p>Sebelum mengikuti Kaderisasi Tingkat Dasar, anda harus melaksanakan <strong>tugas singkat</strong> di
+              link berikut.</p>
+            <p>Tugas harus dikirim selambat-lambatnya pada <strong>Kamis, 18 April 2024, pukul 23.59.</strong></p>
+            <br>
+            <button @click="pushToTugas">Tugas KTD</button>
+          </span>
         </div>
       </section>
     </div>

@@ -7,8 +7,8 @@
         <button @click="showAll">Semua Peserta</button>
       </div>
 
-      <h2 v-if="selectedFilter != 'Semua'" style="margin-block-end:0.5em">Peserta {{ selectedFilter }}</h2>
-      <h2 v-else style="margin-block-end:0.5em">{{ selectedFilter }} Peserta</h2>
+      <h2 v-if="selectedFilter != 'Semua'" style="margin-block-end:0.5em">Peserta {{ selectedFilter }} ({{ filteredPeserta.length }})</h2>
+      <h2 v-else style="margin-block-end:0.5em">{{ selectedFilter }} Peserta ({{ filteredPeserta.length }})</h2>
 
       <a v-if="selectedFilter != 'Semua'" @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar
         Peserta {{ selectedFilter }}</a>
@@ -21,7 +21,6 @@
           <div class="profile">
             <span>
               <h3 class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
-              <h5>{{ peserta.status_pendaftaran }}</h5>
             </span>
 
             <div v-if="selectedFilter != 'Semua'" class="kehadiran">
@@ -33,7 +32,6 @@
                 @click="presensiKehadiran(selectedFilter, peserta.peserta.ID, peserta.ppab_hadir)"
                 :checked="peserta.ppab_hadir">
             </div>
-
           </div>
 
           <p>Komisariat {{ peserta.peserta.Komisariat }} | {{ peserta.peserta.Universitas }}</p>
@@ -170,7 +168,7 @@ export default {
       let csvContent = "data:text/csv;charset=utf-8,";
 
       // Headers
-      csvContent += "Nama\t" + "Komisariat\t" + "Universitas\t" + "Cabang\t" + "Email\t" + "WhatsApp\t" + "Status Peserta\t" + "Presensi PPAB\t" + "Presensi KTD\n";
+      csvContent += "Nama\t" + "Komisariat\t" + "Universitas\t" + "Cabang\t" + "Email\t" + "WhatsApp\t" + "Status Peserta\t" + "Presensi PPAB\t" + "Presensi KTD\t" + "Essay\n";
 
       // Rows
       this.filteredPeserta.forEach(item => {
@@ -184,6 +182,7 @@ export default {
         values.push(item["status_pendaftaran"]); // Add Alamat
         values.push(item["ppab_hadir"]); // Add Alamat
         values.push(item["ktd_hadir"]); // Add Alamat
+        values.push(item["essay_dikumpulkan"]); // Add Alamat
         csvContent += values.join(",") + "\n";
       });
 
@@ -191,7 +190,11 @@ export default {
       // Create a link element
       const link = document.createElement("a");
       link.setAttribute("href", encodeURI(csvContent));
-      link.setAttribute("download", "data.csv");
+
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+      link.setAttribute("download", "GMNI_" + this.selectedFilter + "_" + formattedDate + ".csv");
+
 
       // Append the link to the body
       document.body.appendChild(link);
@@ -201,7 +204,37 @@ export default {
 
       // Clean up
       document.body.removeChild(link);
-    }
+    },
+
+    async downloadFile(phone) {
+      try {
+        // Replace 'file_id' with the actual ID of the file you want to download
+        const result = await axios.get(`/pengumpulan/tugasName/${phone}`)
+        const FileName = result.data.filename;
+
+        // Send a GET request to download the file from the backend
+        const response = await axios.get(`/pengumpulan/tugas/${phone}`, {
+          responseType: 'blob' // Set response type to 'blob' to handle binary data
+        });
+
+        // Create a blob URL for the file data
+        const blob = new Blob([response.data]);
+        const url = window.URL.createObjectURL(blob);
+
+        // Create an anchor element and trigger a download
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', FileName); // Replace 'file_name.extension' with the actual file name and extension
+        document.body.appendChild(link);
+        link.click();
+
+        // Clean up
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 }
 </script>
@@ -267,6 +300,10 @@ a {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.listCard h5 em {
+  color: #0d048a
 }
 </style>
 
