@@ -21,14 +21,10 @@
 
           <div class="profile">
             <span>
-              <!-- hanya bisa melihat detail peserta dari filter semua -->
-
-              <h3 v-if="selectedFilter == 'Semua'" class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
-              <h3 v-else class="name">{{ peserta.peserta.Nama }}</h3>
+              <h3 class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
 
               <h5>{{ peserta.status_pendaftaran }} <em v-if="peserta.essay_dikumpulkan">- <a
                     @click="downloadEssay(peserta.peserta.Phone)">essay</a></em></h5>
-
             </span>
 
             <div v-if="selectedFilter != 'Semua'" class="kehadiran">
@@ -121,7 +117,7 @@ export default {
     },
 
     showDataPeserta(index) {
-      const dataPeserta = this.pesertas[index];
+      const dataPeserta = this.filteredPeserta[index];
       this.dataPeserta = dataPeserta;
       this.statusDataPeserta = true;
     },
