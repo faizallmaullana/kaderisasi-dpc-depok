@@ -49,6 +49,7 @@ export default {
         this.$router.push({ name: 'AdmHomePage' })
       } catch (error) {
         const status = error.response.status;
+        console.log(status)
 
         if (status == "401") {
           this.alertStatus = true;
