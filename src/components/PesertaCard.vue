@@ -2,7 +2,7 @@
   <div class="floating">
     <div class="content">
       <div class="article" v-if="!statusEditData">
-        <img src="@/assets/logo.png" alt="">
+        <img src="@/assets/logo.svg" alt="">
         <h2>{{ dataPeserta.peserta.Nama }}</h2>
         <p class="statusPendaftaran">{{ dataPeserta.status_pendaftaran }}</p>
         <table>

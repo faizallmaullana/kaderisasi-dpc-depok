@@ -28,7 +28,7 @@
       </section>
 
       <section>
-        <img @click="pushToHome" src="@/assets/logo.png" alt="">
+        <img @click="pushToHome" src="@/assets/logo.svg" alt="">
         <br><br>
 
         <div v-if="status != ''">

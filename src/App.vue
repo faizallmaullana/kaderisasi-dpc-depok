@@ -103,7 +103,7 @@ body {
   height: 100%;
   /* Set the height to cover the entire container */
   opacity: 0.08;
-  background-image: url(@/assets/pattern.jpg);
+  background-image: url(@/assets/pattern.svg);
   background-repeat: repeat;
   background-size: cover;
 }

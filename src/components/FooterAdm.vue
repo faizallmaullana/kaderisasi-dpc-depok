@@ -10,7 +10,7 @@
       <hr style="width: 100%; transform: translateY(-10px);">
 
       <span @click="pushToHome" class="organization">
-        <img src="@/assets/logo.png" alt="GMNI">
+        <img src="@/assets/logo.svg" alt="GMNI">
         <div class="divide">
           <h3>GMNI</h3>
           <p>Dewan Pengurus Cabang Depok</p>
