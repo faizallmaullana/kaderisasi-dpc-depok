@@ -21,7 +21,11 @@
 
           <div class="profile">
             <span>
-              <h3 class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
+              <!-- hanya bisa melihat detail peserta dari filter semua -->
+
+              <h3 v-if="filteredPeserta == 'Semua'" class="name" @click="showDataPeserta(index)">{{ peserta.peserta.Nama }}</h3>
+              <h3 v-else class="name">{{ peserta.peserta.Nama }}</h3>
+
               <h5>{{ peserta.status_pendaftaran }} <em v-if="peserta.essay_dikumpulkan">- <a
                     @click="downloadEssay(peserta.peserta.Phone)">essay</a></em></h5>
 
