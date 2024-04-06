@@ -56,11 +56,11 @@ const routes = [
     name: 'DatabaseManagement',
     component: () => import('../views/admin/DatabaseManagement.vue')
   },
-  {
-    path: '/passing/page/090us',
-    name: 'PassingPage',
-    component: () => import('../views/auth/PassingPage.vue')
-  }
+  // {
+  //   path: '/passing/page/090us',
+  //   name: 'PassingPage',
+  //   component: () => import('../views/auth/PassingPage.vue')
+  // }
 ]
 
 const router = createRouter({
