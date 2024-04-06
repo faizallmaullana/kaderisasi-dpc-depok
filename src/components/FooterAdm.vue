@@ -17,9 +17,9 @@
         </div>
       </span>
 
-      <span class="sosmed">
+      <!-- <span class="sosmed">
         <button @click="logOut">LogOut</button>
-      </span>
+      </span> -->
     </div>
 
     <div class="copyright" style="width:100%;background-color: #999;padding:5px 0;">
