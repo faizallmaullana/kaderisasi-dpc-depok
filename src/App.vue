@@ -1,5 +1,7 @@
 <template>
 
+  <!-- <div v-if="!loaded" id="loading"><h4>Loading</h4></div> -->
+
   <div class="container">
     <div class="content">
       <router-view />
@@ -23,6 +25,32 @@ export default {
     FooterAdm,
   },
 
+  // data() {
+  //   return {
+  //     loaded: false,
+  //   }
+  // },
+
+  // beforeMount() {
+  //   console.log("beforeMount")
+  // },
+
+  // mounted() {
+  //   console.log("mounted")
+  // },
+
+  // beforeCreate() {
+  //   console.log("beforeCreate")
+  // },
+
+  // created() {
+  //   console.log("created")
+    
+  //   setTimeout(() => {
+  //     this.loaded = true;
+  //   }, 500)
+  // },
+
   computed: {
     isAnon() {
       // Check if the current route is one of the specified pages
@@ -33,9 +61,9 @@ export default {
     isAuth() {
       // Check if the current route is one of the specified pages
       const validPages = [
-        'AdmHomePage', 
-        'DatabaseManagement', 
-        "AdmDaftarPeserta", 
+        'AdmHomePage',
+        'DatabaseManagement',
+        "AdmDaftarPeserta",
         "DataPesertaPage",
         "DeskripsiTugasPage"
       ];
@@ -151,5 +179,14 @@ nav a.router-link-exact-active {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #c40000;
+}
+
+#loading {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
 </style>

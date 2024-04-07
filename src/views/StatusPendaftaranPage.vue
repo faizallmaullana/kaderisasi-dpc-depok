@@ -39,6 +39,7 @@
             <button @click="pushPendaftaran">Daftarkan Diri</button>
           </div>
         </div>
+        <h3 v-if="status == 'Peserta KTD'">Anda Terdaftar sebagai <em>calon {{ statusPeserta }}</em></h3>
         <h3 v-else>Anda Terdaftar sebagai <em>{{ statusPeserta }}</em></h3>
 
         <div v-if="status == ''" class="dataPeserta">
