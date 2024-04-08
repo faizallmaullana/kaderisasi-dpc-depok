@@ -113,7 +113,7 @@ export default {
           <h3>Kesediaan Mengikuti Kegiatan</h3>
 
 
-          <label for="" class="formRight">Apakah Anda sudah mengikuti <strong class="em">Pekan Penerimaan Anggota Baru
+          <label for="" class="formRight">Apakah Anda bersedia mengikuti <strong class="em">Pekan Penerimaan Anggota Baru
               (PPAB)</strong>?</label>
           <!-- <div class="radio">
             <span>
