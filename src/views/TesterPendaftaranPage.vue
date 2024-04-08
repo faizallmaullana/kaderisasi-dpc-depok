@@ -25,9 +25,12 @@ export default {
     async submitData() {
       const willPpab = this.isWillPpab;
       if (this.isppab == 'false')
-        if (willPpab === '') {
+        if (willPpab == 'true') {
+          this.isppab = false;
+        } else if (willPpab == 'false') {
+          this.isppab = true;
+        } else {
           this.statusMessage = true;
-          return;
         }
 
       const data = {
@@ -112,7 +115,7 @@ export default {
 
           <label for="" class="formRight">Apakah Anda sudah mengikuti <strong class="em">Pekan Penerimaan Anggota Baru
               (PPAB)</strong>?</label>
-          <div class="radio">
+          <!-- <div class="radio">
             <span>
               <input type="radio" id="ppabTrue" v-model="isppab" placeholder="Nama" class="checkbox" value="true">
               <label for="ppabTrue">Saya <strong>sudah</strong> mengikuti PPAB</label>
@@ -122,10 +125,10 @@ export default {
               <input type="radio" id="ppabFalse" v-model="isppab" placeholder="Nama" class="checkbox" value="false">
               <label for="ppabFalse">Saya <strong>belum</strong> mengikuti PPAB</label>
             </span>
-          </div>
+          </div> -->
 
           <!-- dom tampilkan jika user belum pernah mengikuti ppab -->
-          <label for="" class="formRight red" v-if="isppab === 'false'">
+          <!-- <label for="" class="formRight red" v-if="isppab === 'false'">
             Sebagai langkah awal Anda untuk menjadi anggota GMNI, Anda <strong>wajib mengikuti PPAB</strong> yang
             akan dilaksanakan pada:
             <p><strong>Rabu, 17 April 2024</strong></p>
@@ -133,18 +136,18 @@ export default {
             <p><strong>di Depok</strong></p>
             Silakan mengikuti rangkaian kegiatan PPAB tersebut untuk bisa mengikuti Kaderisasi Tingkat Dasar DPC GMNI
             Depok 2024.
-          </label>
-          <div class="radio" v-if="isppab === 'false'">
+          </label> -->
+          <div class="radio">
             <span>
               <input type="radio" id="isWillPpabTrue" v-model="isWillPpab" placeholder="Nama" class="checkbox"
                 value="true">
-              <label for="isWillPpabTrue">Saya <strong>bersedia</strong> mengikuti PPAB</label>
+              <label for="isWillPpabTrue">Saya <strong>bersedia</strong></label>
             </span>
 
             <span>
               <input type="radio" id="isWillPpabFalse" v-model="isWillPpab" placeholder="Nama" class="checkbox"
                 value="false">
-              <label for="isWillPpabFalse">Saya <strong>tidak bersedia</strong> mengikuti PPAB</label>
+              <label for="isWillPpabFalse">Saya <strong>tidak bersedia</strong></label>
             </span>
           </div>
 

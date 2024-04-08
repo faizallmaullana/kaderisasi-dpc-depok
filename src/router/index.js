@@ -12,6 +12,11 @@ const routes = [
     component: () => import('../views/PendaftaranPage.vue')
   },
   {
+    path: '/pendaftaran/tester',
+    name: 'TesterPendaftaranPage',
+    component: () => import('../views/TesterPendaftaranPage.vue')
+  },
+  {
     path: '/status/:phone',
     name: 'StatusPendaftaranPage',
     component: () => import('../views/StatusPendaftaranPage.vue')
