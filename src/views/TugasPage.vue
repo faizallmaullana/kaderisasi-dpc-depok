@@ -6,7 +6,7 @@
       <p>{{ tugas }}</p>
 
       <p>Template tugas bisa didapat dengan melakukan klik pada link di bawah:</p>
-      <h4><a href="@/assets/template.docx" download="Template Tugas KTD">Template Tugas</a></h4>
+      <h4><a href="@/assets/template.docx" download="Template Tugas KTD.docx">Template Tugas</a></h4>
       <hr>
       <p>Tugas harus dikirim selambat-lambatnya pada <strong>Rabu, 24 April 2024, pukul 23.59</strong> menggunakan file
         berformat <strong>.pdf</strong></p>
