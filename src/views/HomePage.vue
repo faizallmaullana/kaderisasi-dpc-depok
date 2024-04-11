@@ -34,7 +34,7 @@
         </h2>
         <h3>DPC GMNI DEPOK 2024</h3>
         <hr>
-        <h4>Jum'at, 19 April 2024 s.d. Minggu, 21 April 2024</h4>
+        <h4>Jum'at, 26 April 2024 s.d. Minggu, 28 April 2024</h4>
       </div>
     </article>
 
