@@ -5,8 +5,8 @@
 
       <p>{{ tugas }}</p>
 
-      <p>Template tugas bisa didapat dengan melakukan klik pada link di bawah:</p>
-      <h4><a :href="templateLink" download="Template Tugas KTD.docx">Template Tugas</a></h4>
+      <p>Template tugas bisa didapat dengan melakukan klik pada link di bawah ini:</p>
+      <h4><a href="https://docs.google.com/document/d/1Ry8ldaTcQn6qlGAcH5cMcZyHEMkk0lyHDdDHfvPvQ5s/edit?usp=drive_link">Template Tugas</a></h4>
       <hr>
       <p>Tugas harus dikirim selambat-lambatnya pada <strong>Rabu, 24 April 2024, pukul 23.59</strong> menggunakan file
         berformat <strong>.pdf</strong></p>
@@ -72,8 +72,6 @@ import { axios } from "@/axios/config.js";
 export default {
   data() {
     return {
-      templateLink: "@/assets/template.docx",
-
       tugas: '',
 
       idFile: '',
