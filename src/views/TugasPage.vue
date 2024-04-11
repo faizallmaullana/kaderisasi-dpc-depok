@@ -4,8 +4,11 @@
       <h2>Tugas Kaderisasi Tingkat Dasar</h2>
 
       <p>{{ tugas }}</p>
+
+      <p>Template tugas bisa didapat dengan melakukan klik pada link di bawah:</p>
+      <h4><a href="https://docs.google.com/document/d/1UYIBv49ZECyhAuisDVYQGPcvplnApVV9AEavOnBbTkk/edit">Template Tugas</a></h4>
       <hr>
-      <p>Tugas harus dikirim selambat-lambatnya pada <strong>Kamis, 18 April 2024, pukul 23.59</strong> menggunakan file
+      <p>Tugas harus dikirim selambat-lambatnya pada <strong>Rabu, 24 April 2024, pukul 23.59</strong> menggunakan file
         berformat <strong>.pdf</strong></p>
 
       <h3>Pengumpulan Tugas</h3>
