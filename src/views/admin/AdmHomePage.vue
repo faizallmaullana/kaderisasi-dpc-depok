@@ -14,7 +14,7 @@
           Peserta {{ selectedFilter }}</a>
       </span>
 
-      <span v-else style="display: flex; flex-direction: column;">
+      <span v-else style="display: flex; flex-direction: column; margin-bottom: 1em;">
         <h2 style="margin-block-end:0.5em">{{ selectedFilter }} Peserta ({{ filteredPeserta.length }})</h2>
         <a @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar {{ selectedFilter }} Peserta</a>
         <input type="text" v-model="searchByPhone" @input="filterPesertaByPhone" placeholder="Cari Nomor WhatsApp">
