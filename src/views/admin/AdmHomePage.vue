@@ -7,13 +7,23 @@
         <button @click="showAll">Semua Peserta</button>
       </div>
 
-      <h2 v-if="selectedFilter != 'Semua'" style="margin-block-end:0.5em">Peserta {{ selectedFilter }} ({{
+      <span v-if="selectedFilter != 'Semua'">
+        <h2 style="margin-block-end:0.5em">Peserta {{ selectedFilter }} ({{
           filteredPeserta.length }})</h2>
-      <h2 v-else style="margin-block-end:0.5em">{{ selectedFilter }} Peserta ({{ filteredPeserta.length }})</h2>
+        <a @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar
+          Peserta {{ selectedFilter }}</a>
+      </span>
 
-      <a v-if="selectedFilter != 'Semua'" @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar
-        Peserta {{ selectedFilter }}</a>
-      <a v-else @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar {{ selectedFilter }} Peserta</a>
+      <span v-if="selectedFilter == 'Search'">
+        <p>test</p>
+      </span>
+
+      <span v-else style="display: flex; flex-direction: column;">
+        <h2 style="margin-block-end:0.5em">{{ selectedFilter }} Peserta ({{ filteredPeserta.length }})</h2>
+        <a @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar {{ selectedFilter }} Peserta</a>
+        <input type="text" v-model="searchByPhone" @input="filterPesertaByPhone">
+      </span>
+
 
       <div class="listCard">
         <div class="peserta" v-for="(peserta, index) in  filteredPeserta " :key="index">
@@ -83,6 +93,8 @@ export default {
       pesertas: [],
       filteredPeserta: [],
       selectedFilter: 'Semua',
+
+      searchByPhone: '',
       // waktu: '',
 
       buttonKehadiran: 'Absen',
@@ -95,11 +107,26 @@ export default {
 
   computed: {
     totalPeserta() {
-      return this.filteredPeserta.length;
-    }
+      return this.searchPhone.length;
+    },
   },
 
+
   methods: {
+
+    filterPesertaByPhone() {
+      // If the searchByPhone is empty, show all pesertas
+      if (!this.searchByPhone) {
+        this.filteredPeserta = this.pesertas;
+        return;
+      }
+
+      // Filter pesertas whose phone numbers contain the searchByPhone string
+      this.filteredPeserta = this.pesertas.filter(peserta =>
+        peserta.peserta.Phone.includes(this.searchByPhone)
+      );
+    },
+
     async semuaPeserta() {
       try {
         const result = await axios.get(`/peserta`);
@@ -308,6 +335,10 @@ a {
 
 .listCard h5 em {
   color: #0d048a
+}
+
+input  {
+  padding: 0.5em 1em;
 }
 </style>
 
