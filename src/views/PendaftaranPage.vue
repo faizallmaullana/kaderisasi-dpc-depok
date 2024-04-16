@@ -128,8 +128,8 @@ export default {
           <label for="" class="formRight red" v-if="isppab === 'false'">
             Sebagai langkah awal Anda untuk menjadi anggota GMNI, Anda <strong>wajib mengikuti PPAB</strong> yang
             akan dilaksanakan pada:
-            <p><strong>Rabu, 17 April 2024</strong></p>
-            <p><strong>Pukul 17.00 WIB s.d. 21.30 WIB</strong></p>
+            <p><strong>Kamis, 25 April 2024</strong></p>
+            <p><strong>Pukul 17.00 WIB s.d. 21.00 WIB</strong></p>
             <p><strong>di Depok</strong></p>
             Silakan mengikuti rangkaian kegiatan PPAB tersebut untuk bisa mengikuti Kaderisasi Tingkat Dasar DPC GMNI
             Depok 2024.

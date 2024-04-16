@@ -8,7 +8,7 @@
           <h2 style="color:var(--red)">Pekan Penerimaan Anggota Baru
           </h2>
           <h3>DPC GMNI DEPOK 2024</h3>
-          <h4>Rabu, 17 April 2024</h4>
+          <h4>Kamis, 25 April 2024</h4>
           <p>Pukul 17.00 WIB s.d. 21.00 WIB</p>
           <hr>
         </div>
@@ -16,7 +16,7 @@
           <h2 style="color:var(--red)">Kaderisasi Tingkat Dasar
           </h2>
           <h3>DPC GMNI DEPOK 2024</h3>
-          <h4>Jum'at, 19 April 2024 s.d. Minggu, 21 April 2024</h4>
+          <h4>Jum'at, 26 April 2024 s.d. Minggu, 28 April 2024</h4>
           <hr>
         </div>
 
@@ -51,7 +51,7 @@
           style="margin-top: 10px;">
             <p>Sebelum mengikuti Kaderisasi Tingkat Dasar, anda harus melaksanakan <strong>tugas singkat</strong> di
               link berikut.</p>
-            <p>Tugas harus dikirim selambat-lambatnya pada <strong>Kamis, 18 April 2024, pukul 23.59.</strong></p>
+            <p>Tugas harus dikirim selambat-lambatnya pada <strong>Rabu, 24 April 2024, pukul 23.59.</strong></p>
             <br>
             <button @click="pushToTugas">Tugas KTD</button>
           </span>
