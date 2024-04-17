@@ -145,7 +145,7 @@ export default {
       try {
         const result = await axios.post("/pengumpulan/tugas", data);
         this.idFile = result.data.id;
-        this.submitMetaData();
+        this.submitMetaData(); //submit file
       } catch (err) {
         const statusCode = err.response.status;
         const errorMessage = err.response.data.message;
@@ -155,7 +155,7 @@ export default {
         } else if (statusCode == 406) {
           this.statusError = "Nomor telpon tidak terdaftar";
         } else if (statusCode == 409) {
-          this.statusError = "Anda sudah pernah mengirim tugas, silakan hubungi narahubung Faizal untuk mengirim ulang tugas Anda."
+          this.statusError = "Anda sudah 'Berhasil' mengirim tugas. Jika ingin memperbarui tugas anda silakan hubungi narahubung Faizal."
         } else if (statusCode == 500) {
           this.statusError = "Anda memasukan format nomor telpon yang salah"
         } else {
