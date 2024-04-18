@@ -11,11 +11,12 @@
         </div>
         <p>Let's Come and Join Us!</p>
       </div>
+
+      <div class="tema">
+        <h3>Memaknai Marhaenisme Guna Menghadapi Bonus Demografi</h3>
+      </div>
     </section>
 
-    <div class="tema">
-      <h3>Memaknai Marhaenisme Guna Menghadapi Bonus Demografi</h3>
-    </div>
 
     <div class="count-down">
       <div class="wrapper">
@@ -151,16 +152,24 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 20px 0;
 }
 
 #portal section {
-  padding: 30px 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#portal .title {
   width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: calc(100% - 70px);
 }
 
 #portal .title img {
@@ -185,10 +194,17 @@ export default {
 }
 
 #portal .tema {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--red);
   width: 100%;
   color: var(--white);
-  padding: 10px 0;
+  height: 80px;
+}
+
+#portal .tema h3 {
+  margin-block: 0;
 }
 
 #portal .count-down {
