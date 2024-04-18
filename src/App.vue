@@ -54,7 +54,7 @@ export default {
   computed: {
     isAnon() {
       // Check if the current route is one of the specified pages
-      const validPages = ['HomePage', 'PendaftaranPage', 'StatusPendaftaranPage', 'PengumpulanTugasPage'];
+      const validPages = ['HomePage', 'PendaftaranPage', 'StatusPendaftaranPage', 'PengumpulanTugasPage', 'PortalPage'];
       return validPages.includes(this.$route.name);
     },
 
