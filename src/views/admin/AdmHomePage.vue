@@ -195,7 +195,7 @@ export default {
       let csvContent = "data:text/csv;charset=utf-8,";
 
       // Headers
-      csvContent += "Nama\t" + "Komisariat\t" + "Universitas\t" + "Cabang\t" + "Email\t" + "WhatsApp\t" + "Status Peserta\t" + "Presensi PPAB\t" + "Presensi KTD\t" + "Essay\n";
+      csvContent += "Nama," + "Komisariat," + "Universitas," + "Cabang," + "Email," + "WhatsApp," + "Status Peserta," + "Presensi PPAB," + "Presensi KTD," + "Essay\n";
 
       // Rows
       this.filteredPeserta.forEach(item => {
