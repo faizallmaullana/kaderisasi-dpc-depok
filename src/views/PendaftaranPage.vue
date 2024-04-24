@@ -17,12 +17,15 @@ export default {
       universitas: '',
       cabang: 'Depok',
 
+      uploading: false,
+
       statusMessage: false,
     }
   },
 
   methods: {
     async submitData() {
+      this.uploading = true;
       const willPpab = this.isWillPpab;
       if (this.isppab == 'false')
         if (willPpab === '') {
@@ -48,6 +51,7 @@ export default {
         this.$router.push(`/status/${phone}`);
       }
       catch (error) {
+        this.uploading = false;
         this.$router.push(`/status/08`);
       }
     }
@@ -165,7 +169,10 @@ export default {
           </div>
 
           <p v-if="statusMessage" class="em">Semua kolom harus terisi</p>
-          <input type="submit" value="Submit" class="inputButton">
+
+          <input v-if="!uploading" type="submit" value="Submit" class="inputButton">
+          <h3 v-if="uploading">Mohon Tunggu</h3>
+
           <p v-if="isktd == 'true'">*Setelah melakukan pendaftaran, anda akan diarahkan untuk mengerjakan sebuah tugas
             singkat</p>
 

@@ -25,7 +25,8 @@
       <input type="file" id="file" @change="handleFileChange" required>
 
       <p v-if="statusError">{{ statusError }}</p>
-      <input type="submit" class="inputButton" value="Upload">
+      <input v-if="!uploaded" type="submit" class="inputButton" value="Upload">
+      <h3 v-if="uploaded">Mohon Tunggu...</h3>
     </form>
   </article>
 
@@ -84,6 +85,8 @@ export default {
 
       statusError: '',
       message: false,
+
+      uploaded: false,
     }
   },
 
@@ -145,6 +148,7 @@ export default {
       }
 
       try {
+        this.uploaded = true;
         const result = await axios.post("/pengumpulan/tugas", data);
         this.idFile = result.data.id;
         this.submitMetaData(); //submit file
@@ -165,6 +169,7 @@ export default {
         }
 
         if (errorMessage === "nomor telpon tidak terdaftar") {
+          this.uploaded = false;
           this.statusError = 'Nomor Telpon tidak terdaftar';
           return
         }
