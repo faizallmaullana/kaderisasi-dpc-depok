@@ -86,7 +86,7 @@ export default {
       statusError: '',
       message: false,
 
-      uploaded: false,
+      uploading: false,
     }
   },
 
@@ -148,7 +148,7 @@ export default {
       }
 
       try {
-        this.uploaded = true;
+        this.uploading = true;
         const result = await axios.post("/pengumpulan/tugas", data);
         this.idFile = result.data.id;
         this.submitMetaData(); //submit file
@@ -169,10 +169,12 @@ export default {
         }
 
         if (errorMessage === "nomor telpon tidak terdaftar") {
-          this.uploaded = false;
+          this.uploading = false;
           this.statusError = 'Nomor Telpon tidak terdaftar';
           return
         }
+
+        this.uploading = false;
       }
     },
 

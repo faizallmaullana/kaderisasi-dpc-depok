@@ -16,6 +16,7 @@ export default {
       komisariat: '',
       universitas: '',
       cabang: 'Depok',
+      statusTerdaftar: false,
 
       uploading: false,
 
@@ -30,6 +31,7 @@ export default {
       if (this.isppab == 'false')
         if (willPpab === '') {
           this.statusMessage = true;
+          this.uploading = false;
           return;
         }
 
@@ -52,8 +54,14 @@ export default {
       }
       catch (error) {
         this.uploading = false;
+        const status = error.response.status;
+        if (status == "409") {
+          this.statusTerdaftar = true;
+          return;
+        }
         this.$router.push(`/status/08`);
       }
+      this.uploading = false;
     }
   }
 }
@@ -169,9 +177,10 @@ export default {
           </div>
 
           <p v-if="statusMessage" class="em">Semua kolom harus terisi</p>
+          <p v-if="statusTerdaftar" class="em">Nomor Telpon Anda sudah terdaftar, silakan gunakan yang lain</p>
 
           <input v-if="!uploading" type="submit" value="Submit" class="inputButton">
-          <h3 v-if="uploading">Mohon Tunggu</h3>
+          <h3 v-if="uploading">Mohon Tunggu...</h3>
 
           <p v-if="isktd == 'true'">*Setelah melakukan pendaftaran, anda akan diarahkan untuk mengerjakan sebuah tugas
             singkat</p>
