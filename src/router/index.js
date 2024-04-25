@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/pendaftaran',
     name: 'PendaftaranPage',
-    component: () => import('../views/PendaftaranPage.vue')
+    component: () => import('../views/PendaftaranPageDitutup.vue')
   },
   {
     path: '/pendaftaran/tester',
