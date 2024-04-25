@@ -8,8 +8,7 @@
     </div>
 
     <article>
-      <h1>Maintenance</h1>
-      <h4>website dapat diakses lagi pada 15.00</h4>
+      <h1>Page 404 Not Found</h1>
     </article>
   </div>
 </template>
