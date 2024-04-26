@@ -21,8 +21,7 @@
           <br> <br>
           <input type="submit" value="Cek Status" class="inputButton cekStatus">
 
-          <p style="text-align: center">Belum Daftar?</p>
-          <input class="inputButton pendaftaran" type="submit" value="Pendaftaran" @click="pushPendaftaran" />
+          <input class="inputButton pendaftaran" type="submit" value="Pengumpulan Tugas" @click="pushToTugas" />
         </form>
       </div>
 
@@ -71,6 +70,10 @@ export default {
 
     pushPendaftaran() {
       this.$router.push({ name: 'PendaftaranPage' });
+    },
+
+    pushToTugas() {
+      this.$router.push({ name: 'PengumpulanTugasPage' })
     },
   }
 
