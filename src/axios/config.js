@@ -2,7 +2,7 @@ import axios from "axios";
 import { URL } from "@/axios/ApiBaseURL";
 
 const API = axios.create({
-    baseURL: URL.internet,
+    baseURL: URL.localurl,
     timeout: 5000
 });
 
