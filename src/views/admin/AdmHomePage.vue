@@ -90,7 +90,7 @@ export default {
       filteredPeserta: [],
       selectedFilter: 'Semua',
 
-      searchByPhone: '',
+      searchByPhone: null,
       // waktu: '',
 
       buttonKehadiran: 'Absen',
@@ -120,7 +120,7 @@ export default {
 
       // Filter pesertas whose phone numbers contain the searchByPhone string
       this.filteredPeserta = this.pesertas.filter(peserta =>
-        peserta.peserta.Phone.includes(this.searchByPhone)
+        peserta.peserta.Nama.includes(this.searchByPhone)
       );
     },
 
