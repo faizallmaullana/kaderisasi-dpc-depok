@@ -111,16 +111,18 @@ export default {
   methods: {
 
     filterPesertaByPhone() {
-      // Sementara diganti jadi cari nama
       // If the searchByPhone is empty, show all pesertas
       if (!this.searchByPhone) {
         this.filteredPeserta = this.pesertas;
         return;
       }
 
-      // Filter pesertas whose phone numbers contain the searchByPhone string
+      // Convert the search term to lowercase for case-insensitive search
+      const searchTerm = this.searchByPhone.toLowerCase();
+
+      // Filter pesertas whose names contain the search term
       this.filteredPeserta = this.pesertas.filter(peserta =>
-        peserta.peserta.Phone.includes(this.searchByPhone)
+        peserta.peserta.Nama.toLowerCase().includes(searchTerm)
       );
     },
 
@@ -334,7 +336,7 @@ a {
   color: #0d048a
 }
 
-input  {
+input {
   padding: 0.5em 1em;
 }
 </style>
