@@ -120,7 +120,7 @@ export default {
 
       // Filter pesertas whose phone numbers contain the searchByPhone string
       this.filteredPeserta = this.pesertas.filter(peserta =>
-        peserta.peserta.Nama.includes(this.searchByPhone)
+        peserta.peserta.Phone.includes(this.searchByPhone)
       );
     },
 
