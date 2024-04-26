@@ -17,7 +17,7 @@
       <span v-else style="display: flex; flex-direction: column; margin-bottom: 1em;">
         <h2 style="margin-block-end:0.5em">{{ selectedFilter }} Peserta ({{ filteredPeserta.length }})</h2>
         <a @click="convertJSONtoCSV" style="margin-block-end: 1em">Download Daftar {{ selectedFilter }} Peserta</a>
-        <input type="text" v-model="searchByPhone" @input="filterPesertaByPhone" placeholder="Cari Nomor WhatsApp">
+        <input type="text" v-model="searchByPhone" @input="filterPesertaByPhone" placeholder="Cari Nama...">
       </span>
 
 
@@ -111,6 +111,7 @@ export default {
   methods: {
 
     filterPesertaByPhone() {
+      // Sementara diganti jadi cari nama
       // If the searchByPhone is empty, show all pesertas
       if (!this.searchByPhone) {
         this.filteredPeserta = this.pesertas;
@@ -119,7 +120,7 @@ export default {
 
       // Filter pesertas whose phone numbers contain the searchByPhone string
       this.filteredPeserta = this.pesertas.filter(peserta =>
-        peserta.peserta.Phone.includes(this.searchByPhone)
+        peserta.peserta.Nama.includes(this.searchByPhone)
       );
     },
 
