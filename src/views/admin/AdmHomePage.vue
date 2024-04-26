@@ -122,7 +122,7 @@ export default {
 
       // Filter pesertas whose names contain the search term
       this.filteredPeserta = this.pesertas.filter(peserta =>
-        peserta.peserta.Nama.toLowerCase().includes(searchTerm)
+        peserta.peserta.Nama.toLowerCase().includes(searchTerm) || peserta.peserta.Phone.toLowerCase().includes(searchTerm)
       );
     },
 
